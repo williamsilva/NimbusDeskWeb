@@ -1,0 +1,620 @@
+{
+  "app": {
+    "name": "NimbusDesk"
+  },
+  "routes": {
+    "security": {
+      "users": {
+        "title": "Usuarios"
+      },
+      "groups": {
+        "title": "Grupos"
+      },
+      "accountProfile": {
+        "title": "Mi cuenta"
+      },
+      "accountPassword": {
+        "title": "Cambiar contraseña"
+      },
+      "groupDetail": {
+        "title": "Detalle del grupo"
+      }
+    },
+    "settings": {
+      "email": {
+        "title": "E-mail"
+      },
+      "backup": {
+        "title": "Backup"
+      },
+      "emailLog": {
+        "title": "Auditoría de E-mail"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "forbidden": {
+      "title": "Acceso denegado"
+    },
+    "notFound": {
+      "title": "Página no encontrada"
+    }
+  },
+  "topbar": {
+    "online": "Online",
+    "brandName": "NimbusDesk",
+    "brandSub": "Base del producto",
+    "sidebarToggleAria": "Mostrar/ocultar menú",
+    "sidebarShowTooltip": "Mostrar menú",
+    "sidebarHideTooltip": "Ocultar menú",
+    "themeToggleAria": "Alternar tema",
+    "langAria": "Seleccionar idioma",
+    "sessionExpired": "Sesión expirada",
+    "sessionExpireTooltip": "La sesión expira por inactividad",
+    "sessionExpiredTooltip": "Inicia sesión nuevamente"
+  },
+  "menu": {
+    "me": "Mi cuenta",
+    "more": "Más",
+    "dashboard": "Dashboard",
+    "security": {
+      "title": "Seguridad",
+      "groups": "Grupos",
+      "users": "Usuarios",
+      "myAccount": "Mi cuenta",
+      "changePassword": "Cambiar contraseña"
+    },
+    "settings": {
+      "title": "Configuraciones",
+      "email": "Configuración de E-mail",
+      "backup": "Backup",
+      "emailLog": "Auditoría de E-mail"
+    }
+  },
+  "sidebar": {
+    "userFallback": "Usuario",
+    "logout": "Salir"
+  },
+  "breadcrumb": {
+    "groups": "Grupos",
+    "users": "Usuarios",
+    "dashboard": {
+      "title": "Dashboard"
+    }
+  },
+  "footer": {
+    "copyright": "NimbusDesk",
+    "madeWith": "Todos los derechos reservados."
+  },
+  "filters": {
+    "activeCount": "{count, plural, =0 {Ningún filtro activo} one {# filtro activo} other {# filtros activos}}",
+    "noneActive": "Ningún filtro activo"
+  },
+  "pagination": {
+    "emptymessage": "No se encontraron datos para mostrar!",
+    "report": "Mostrando '{first}' a '{last}' de '{totalRecords}' registros"
+  },
+  "validation": {
+    "invalid": "Valor inválido",
+    "required": "Obligatorio",
+    "minLength": "Mínimo de {requiredLength} caracteres",
+    "maxLength": "Máximo de {requiredLength} caracteres",
+    "email": "E-mail inválido",
+    "pattern": "Formato inválido",
+    "min": "El valor mínimo es {min}",
+    "max": "El valor máximo es {max}",
+    "uuid": "Identificador inválido",
+    "document": "Documento inválido",
+    "passwordPolicy": "La contraseña no cumple la política",
+    "server": "{message}"
+  },
+  "users": {
+    "subtitle": "Gestiona usuarios, estados e invitaciones",
+    "new": {
+      "title": "Nuevo usuario",
+      "subtitle": "Registro de usuario"
+    },
+    "edit": {
+      "title": "Editar usuario",
+      "subtitle": "Edición de usuario"
+    },
+    "fields": {
+      "name": "Nombre",
+      "status": "Estado",
+      "groups": "Grupos",
+      "userName": "Usuario",
+      "document": "Documento",
+      "createdAt": "Registrado el",
+      "periodCreatedAt": "Período del registro",
+      "lastLoginAt": "Último inicio de sesión",
+      "periodLastLoginAt": "Período del último inicio de sesión",
+      "blockedUntil": "Bloqueado hasta",
+      "periodBlockedUntil": "Período del bloqueo",
+      "passwordExpiresAt": "Contraseña expira",
+      "periodPasswordExpiresAt": "Período de expiración de la contraseña",
+      "createdBy": "Registrado por"
+    },
+    "columns": {
+      "name": "Nombre",
+      "status": "Estado",
+      "userName": "Nombre de usuario",
+      "document": "Documento",
+      "createdAt": "Registrado el",
+      "lastLoginAt": "Último inicio de sesión",
+      "blockedUntil": "Bloqueado hasta",
+      "passwordExpiresAt": "Contraseña expira",
+      "createdBy": "Registrado por"
+    },
+    "form": {
+      "loadError": "No fue posible cargar los datos del usuario",
+      "saveError": "No fue posible guardar el usuario.",
+      "created": "Usuario creado correctamente.",
+      "updated": "Usuario actualizado correctamente",
+      "resend": {
+        "button": "Reenviar e-mail de contraseña",
+        "header": "Reenviar e-mail",
+        "message": "¿Deseas reenviar el e-mail para registrar la contraseña?",
+        "sent": "E-mail enviado correctamente.",
+        "error": "No fue posible reenviar el e-mail.",
+        "todoServer": "Funcionalidad pendiente en el servidor."
+      }
+    },
+    "status": {
+      "null": "N/D",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "blocked": "Bloqueado",
+      "disabled": "Deshabilitado",
+      "pending_password": "Pendiente de contraseña",
+      "unknown": "Desconocido"
+    },
+    "invite": {
+      "resend": "Reenviar invitación",
+      "resent": "Invitación reenviada correctamente.",
+      "resendError": "No fue posible reenviar la invitación."
+    },
+    "delete": {
+      "header": "Confirmar eliminación",
+      "success": "Usuario desactivado correctamente",
+      "message": "¿Deseas eliminar el usuario {userName}?"
+    },
+    "activate": {
+      "selected": "Activar",
+      "header": "Confirmar activación",
+      "successSingle": "Usuario activado correctamente.",
+      "successBulk": "{count, plural, one {# usuario activado correctamente.} other {# usuarios activados correctamente.}}",
+      "messageSingle": "¿Deseas activar el usuario {userName}?",
+      "messageBulk": "{count, plural, one {¿Deseas activar # usuario seleccionado?} other {¿Deseas activar # usuarios seleccionados?}}"
+    },
+    "deactivate": {
+      "selected": "Inactivar",
+      "header": "Confirmar inactivación",
+      "successSingle": "Usuario inactivado correctamente.",
+      "successBulk": "{count, plural, one {# usuario inactivado correctamente.} other {# usuarios inactivados correctamente.}}",
+      "messageSingle": "¿Deseas inactivar el usuario {userName}?",
+      "messageBulk": "{count, plural, one {¿Deseas inactivar # usuario seleccionado?} other {¿Deseas inactivar # usuarios seleccionados?}}"
+    },
+    "selection": {
+      "currentMode": "Modo de selección",
+      "count": "{count, plural, =0 {Ningún seleccionado} one {# seleccionado} other {# seleccionados}}",
+      "pickOneFirst": "Selecciona primero un usuario elegible para definir el contexto de la selección.",
+      "mode": {
+        "none": "Ninguno",
+        "activate": "Activación por lote",
+        "deactivate": "Inactivación por lote"
+      }
+    },
+    "action": {
+      "activate": {
+        "label": "Activar",
+        "noPermission": "No tienes permiso para activar usuarios.",
+        "protected": "El usuario protegido no puede ser activado por esta acción.",
+        "invalidStatus": "Solo los usuarios inactivos pueden ser activados."
+      },
+      "deactivate": {
+        "label": "Inactivar",
+        "noPermission": "No tienes permiso para inactivar usuarios.",
+        "self": "No puedes inactivar tu propio usuario.",
+        "protected": "El usuario protegido no puede ser inactivado.",
+        "invalidStatus": "Solo los usuarios activos pueden ser inactivados."
+      }
+    },
+    "empty": {
+      "title": "Ningún usuario encontrado"
+    }
+  },
+  "enum": {
+    "periodEnum": {
+      "day": "Día",
+      "year": "Año",
+      "month": "Mes",
+      "end": "Final",
+      "start": "Inicio",
+      "interval": "Intervalo"
+    }
+  },
+  "accountPassword": {
+    "title": "Cambiar contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "passwordMismatch": "Las contraseñas deben ser iguales.",
+    "policyTitle": "Política de contraseña",
+    "submit": "Guardar contraseña",
+    "successTitle": "Contraseña cambiada",
+    "successMessage": "Tu contraseña se actualizó correctamente.",
+    "footer": "© 2026 NimbusDesk • Todos los derechos reservados",
+    "formSubtitle": "Ingresa tu contraseña actual y define una nueva contraseña segura.",
+    "policySubtitle": "La contraseña debe cumplir las reglas de seguridad a continuación.",
+    "formSectionTitle": "Datos del cambio",
+    "userFallback": "Usuario",
+    "usernameFallback": "Sin usuario",
+    "summary": {
+      "rules": "Reglas",
+      "strength": "Fuerza",
+      "valid": "Reglas válidas",
+      "invalid": "Reglas inválidas",
+      "minLength": "Tamaño mínimo"
+    },
+    "strength": {
+      "title": "Fortaleza de la contraseña",
+      "empty": "No informada",
+      "weak": "Débil",
+      "medium": "Media",
+      "strong": "Fuerte",
+      "rulesSatisfied": "reglas cumplidas"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "subtitle": "Consulta tus datos de perfil y registro.",
+    "card": {
+      "userData": "Datos del usuario",
+      "groups": "Grupos",
+      "permissions": "Permisos",
+      "groupsSubtitle": "Perfiles organizacionales vinculados al usuario.",
+      "permissionsSubtitle": "Accesos disponibles para el usuario autenticado."
+    },
+    "permissionDescription": {
+      "SUPPORT": "Soporte total del sistema",
+      "USERS_CONSULT": "Consulta usuarios",
+      "USERS_CREATE": "Crea usuarios",
+      "USERS_DELETE": "Elimina usuarios",
+      "USERS_CHANGE": "Modifica usuarios",
+      "USERS_ACTIVE_OR_INACTIVE": "Activa o desactiva usuarios",
+      "GROUPS_CONSULT": "Consulta grupos",
+      "GROUPS_CREATE": "Crea grupos",
+      "GROUPS_DELETE": "Elimina grupos",
+      "GROUPS_CHANGE": "Modifica grupos",
+      "GROUPS_MANAGEMENT_USER": "Agrega usuario al grupo",
+      "GROUPS_ACTIVE_OR_INACTIVE": "Activa o desactiva grupos",
+      "GROUPS_MANAGEMENT_PERMISSION": "Agrega permiso al grupo",
+      "EMAIL_SETTINGS_CONSULT": "Consulta configuración de e-mail",
+      "EMAIL_SETTINGS_PROCESS": "Modifica configuración de e-mail",
+      "EMAIL_LOG_CONSULT": "Consulta e-mails enviados",
+      "BACKUP_PROCESS": "Dispara backup manual de la base de datos"
+    },
+    "section": {
+      "identification": "Identificación",
+      "security": "Seguridad",
+      "audit": "Auditoría"
+    },
+    "field": {
+      "id": "ID",
+      "name": "Nombre",
+      "username": "Usuario",
+      "document": "Documento",
+      "status": "Estado",
+      "blocked": "Bloqueado",
+      "blockedUntil": "Bloqueado hasta",
+      "password": "Contraseña",
+      "passwordExpires": "Contraseña expira el",
+      "issuer": "Emisor",
+      "createdAt": "Creado el",
+      "lastLogin": "Último inicio de sesión",
+      "groups": "Grupos",
+      "permissions": "Permisos"
+    },
+    "button": {
+      "changePassword": "Cambiar contraseña"
+    },
+    "fallback": {
+      "noName": "Usuario sin nombre",
+      "noUsername": "Usuario no informado"
+    },
+    "items": "{count, plural, =0 {0 itens} one {# item} other {# itens}}",
+    "empty": {
+      "groups": "Ningún grupo informado.",
+      "permissions": "Ningún permiso encontrado."
+    },
+    "loading": "Espera mientras cargamos los datos del perfil.",
+    "error": "No fue posible cargar el perfil."
+  },
+  "groups": {
+    "subtitle": "Gestiona grupos y permisos de acceso",
+    "new": {
+      "title": "Nuevo grupo",
+      "subtitle": "Registro de grupo"
+    },
+    "edit": {
+      "title": "Editar grupo",
+      "subtitle": "Edición de grupo"
+    },
+    "fields": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "createdAt": "Registrado el",
+      "periodCreatedAt": "Período del registro",
+      "createdBy": "Registrado por"
+    },
+    "columns": {
+      "name": "Nombre",
+      "usersCount": "Usuarios",
+      "description": "Descripción",
+      "createdAt": "Registrado el",
+      "createdBy": "Registrado por",
+      "permissionsCount": "Permisos"
+    },
+    "form": {
+      "loadError": "No fue posible cargar los datos del grupo.",
+      "saveError": "No fue posible guardar el grupo.",
+      "created": "Grupo creado correctamente.",
+      "updated": "Grupo actualizado correctamente.",
+      "permissionDenied": "No tienes permiso para guardar grupos."
+    },
+    "empty": {
+      "title": "Ningún grupo encontrado"
+    },
+    "action": {
+      "create": {
+        "noPermission": "No tienes permiso para crear grupos."
+      },
+      "edit": {
+        "noPermission": "No tienes permiso para editar grupos."
+      },
+      "delete": {
+        "noPermission": "No tienes permiso para eliminar grupos."
+      }
+    },
+    "detail": {
+      "title": "Detalle del grupo",
+      "subtitle": "Resumen, permisos y usuarios del grupo",
+      "tabs": {
+        "summary": "Resumen",
+        "permissions": "Permisos",
+        "users": "Usuarios"
+      },
+      "permissions": {
+        "title": "Permisos",
+        "subtitle": "Asocia o desasocia permisos de este grupo.",
+        "placeholder": "Selecciona los permisos",
+        "saved": "Permisos actualizados correctamente.",
+        "saveError": "No fue posible guardar los permisos del grupo.",
+        "empty": "Ningún permiso asociado.",
+        "removeConfirm": {
+          "action": "Quitar del grupo",
+          "header": "Quitar permiso del grupo",
+          "message": "¿Desea realmente quitar el permiso {permissionName} de este grupo?",
+          "success": "Permiso quitado del grupo con éxito."
+        }
+      },
+      "users": {
+        "title": "Usuarios",
+        "manageHint": "Los miembros y la vinculación a grupos se gestionan desde la pantalla de Usuarios.",
+        "subtitle": "Asocia o desasocia usuarios de este grupo.",
+        "placeholder": "Selecciona los usuarios",
+        "saved": "Usuarios actualizados correctamente.",
+        "saveError": "No fue posible guardar los usuarios del grupo.",
+        "empty": "Ningún usuario asociado.",
+        "removeConfirm": {
+          "action": "Quitar del grupo",
+          "header": "Quitar usuario del grupo",
+          "message": "¿Desea realmente quitar a {userName} de este grupo?",
+          "success": "Usuario quitado del grupo con éxito."
+        }
+      }
+    },
+    "delete": {
+      "header": "Eliminar grupo",
+      "message": "¿Deseas realmente eliminar el grupo {groupName}?",
+      "success": "Grupo eliminado correctamente."
+    }
+  },
+  "session": {
+    "expiring": {
+      "title": "La sesión va a expirar",
+      "body": "Tu sesión va a expirar por inactividad en",
+      "hint": "Haz clic en “Renovar” para continuar sin recargar la página."
+    },
+    "expired": {
+      "title": "Sesión expirada",
+      "body": "Tu sesión expiró por inactividad.",
+      "hint": "Para continuar, inicia sesión nuevamente."
+    }
+  },
+  "common": {
+    "no": "No",
+    "add": "Agregar",
+    "to": "hasta",
+    "yes": "Sí",
+    "new": "Nuevo",
+    "all": "Todos",
+    "until": "Hasta",
+    "error": "Error",
+    "action": "Acción",
+    "save": "Guardar",
+    "edit": "Editar",
+    "back": "Volver",
+    "logout": "Salir",
+    "close": "Cerrar",
+    "clear": "Limpiar",
+    "quantity": "Cant.",
+    "status": "Estado",
+    "apply": "Aplicar",
+    "actions": "Acciones",
+    "filter": "Filtrar",
+    "remove": "Eliminar",
+    "period": "Periodo",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "activate": "Activar",
+    "success": "Éxito",
+    "info": "Información",
+    "warning": "Atención",
+    "view": "Visualizar",
+    "notNow": "Ahora no",
+    "from": "A partir de",
+    "update": "Actualizar",
+    "confirm": "Confirmar",
+    "deactivate": "Inactivar",
+    "loading": "Cargando...",
+    "goToLogin": "Ir al login",
+    "notInformed": "No informado",
+    "tableFilters": "Filtros de tabla",
+    "renewSession": "Renovar sesión",
+    "correlationId": "ID de correlación",
+    "notInformedFemale": "No informada",
+    "advancedFilters": "Filtros avanzados",
+    "noRecordsFound": "No se encontraron registros.",
+    "selected": "{count, plural, =0 {Ningún seleccionado} one {# seleccionado} other {# seleccionados}}",
+    "selectedFemale": "{count, plural, =0 {Ninguna seleccionada} one {# seleccionada} other {# seleccionadas}}",
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
+  "confirm": {
+    "logoutTitle": "Cerrar sesión",
+    "logoutMessage": "¿Deseas realmente salir de NimbusDesk?"
+  },
+  "notifications": {
+    "welcome": "¡Hola, {name}!",
+    "itemsCount": "{count, plural, =0 {Ningún item} one {# item} other {# itens}}"
+  },
+  "errors": {
+    "global": {
+      "GENERIC_ERROR": "Ocurrió un error inesperado. Inténtalo nuevamente.",
+      "NETWORK_ERROR": "No fue posible conectarse al servidor.",
+      "ACCESS_DENIED": "No tienes permiso para ejecutar esta acción.",
+      "SESSION_EXPIRED": "Tu sesión expiró. Inicia sesión nuevamente.",
+      "VALIDATION_ERROR": "Algunos campos deben corregirse.",
+      "USER_NOT_FOUND": "Usuario no encontrado.",
+      "USER_DOCUMENT_ALREADY_EXISTS": "Ya existe un usuario con este documento.",
+      "USER_USERNAME_ALREADY_EXISTS": "Ya existe un usuario con este nombre de usuario.",
+      "USER_DELETE_NOT_ALLOWED": "Este usuario no puede ser eliminado.",
+      "USER_UPDATE_NOT_ALLOWED": "Este usuario no puede ser modificado.",
+      "NOT_FOUND": "Recurso no encontrado.",
+      "INTERNAL_ERROR": "Ocurrió un error interno. Inténtalo nuevamente.",
+      "GROUP_NAME_ALREADY_EXISTS": "Ya existe un grupo con este nombre.",
+      "GROUP_DELETE_SUPPORT_NOT_ALLOWED": "El grupo SUPPORT no puede ser eliminado ni modificado en esta operación.",
+      "GROUP_DELETE_IN_USE": "Este grupo tiene usuarios asociados y no puede ser eliminado.",
+      "GROUP_USER_WOULD_BE_ORPHANED": "No es posible quitar este usuario: quedaría sin ningún grupo en este sistema. Agréguelo a otro grupo antes de quitarlo de aquí.",
+      "PERMISSION_NOT_FOUND": "Uno o más permisos informados no fueron encontrados."
+    },
+    "fields": {
+      "*": {
+        "required": "{label} es obligatorio.",
+        "minLength": "{label} debe tener al menos {requiredLength} caracteres.",
+        "maxLength": "{label} debe tener como máximo {requiredLength} caracteres.",
+        "min": "{label} debe ser como mínimo {min}.",
+        "max": "{label} debe ser como máximo {max}.",
+        "email": "{label} informa un e-mail válido.",
+        "pattern": "{label} tiene un formato inválido.",
+        "invalid": "{label} es inválido.",
+        "passwordMismatch": "Las contraseñas deben ser iguales.",
+        "duplicate": "{label} ya registrado."
+      }
+    }
+  },
+  "email": {
+    "settings": {
+      "subtitle": "Configuración del proveedor de envío de correos.",
+      "impl": "Implementación",
+      "implHint": "Define el proveedor de envío. FAKE registra correos en el log (desarrollo), SMTP usa un servidor de correo configurado, API_KEY usa la API REST del proveedor configurado (actualmente: Brevo).",
+      "fromName": "Nombre del remitente",
+      "fromNameHint": "Nombre que aparece en el campo 'De' de los correos enviados.",
+      "fromEmail": "Correo del remitente",
+      "fromEmailHint": "Dirección de correo que aparece en el campo 'De'.",
+      "brevoTitle": "Configuración de Clave de API",
+      "brevoApiKey": "Clave de API",
+      "brevoApiKeyHint": "Clave de autenticación de la API del proveedor (actualmente: Brevo). Necesaria cuando la implementación es API_KEY.",
+      "brevoBaseUrl": "URL base de la API",
+      "brevoBaseUrlHint": "URL base de la API del proveedor (actualmente: Brevo).",
+      "smtpTitle": "Configuración SMTP",
+      "smtpHost": "Host SMTP",
+      "smtpHostHint": "Dirección del servidor de correo (ej: smtp.gmail.com).",
+      "smtpPort": "Puerto",
+      "smtpPortHint": "Puerto del servidor SMTP. Predeterminado: 587 (STARTTLS) o 465 (SSL).",
+      "smtpUsername": "Usuario",
+      "smtpUsernameHint": "Usuario para autenticación SMTP, generalmente el propio correo electrónico.",
+      "smtpPassword": "Contraseña",
+      "smtpPasswordHint": "Contraseña para autenticación en el servidor SMTP.",
+      "smtpAuth": "Autenticación",
+      "smtpAuthHint": "Habilita la autenticación SMTP con usuario y contraseña.",
+      "smtpStarttls": "STARTTLS",
+      "smtpStarttlsHint": "Habilita la actualización de la conexión a TLS mediante STARTTLS. Recomendado para el puerto 587.",
+      "smtpSsl": "SSL/TLS",
+      "smtpSslHint": "Habilita conexión SSL/TLS directa. Recomendado para el puerto 465.",
+      "saved": "Configuración de correo guardada con éxito.",
+      "saveError": "No fue posible guardar la configuración de correo."
+    }
+  },
+  "emailLog": {
+    "subtitle": "Registro de todos los correos enviados por el sistema - destinatarios, asunto, estado y cuerpo.",
+    "columns": {
+      "recipients": "Destinatarios",
+      "subject": "Asunto",
+      "eventType": "Evento",
+      "status": "Estado",
+      "sentAt": "Enviado el",
+      "errorMessage": "Error"
+    },
+    "fields": {
+      "recipients": "Destinatarios",
+      "subject": "Asunto",
+      "eventType": "Evento",
+      "status": "Estado",
+      "sentAt": "Enviado el",
+      "periodSentAt": "Período del envío"
+    },
+    "status": {
+      "SENT": "Enviado",
+      "FAILED": "Falla en el envío"
+    },
+    "empty": {
+      "title": "Ningún correo registrado"
+    },
+    "detail": {
+      "title": "Detalles del correo",
+      "recipients": "Destinatarios",
+      "subject": "Asunto",
+      "template": "Plantilla",
+      "body": "Cuerpo",
+      "noBody": "Cuerpo no disponible para correos enviados antes de esta versión."
+    }
+  },
+  "backup": {
+    "settings": {
+      "subtitle": "Genera un backup bajo demanda de los bancos de datos, para descarga inmediata.",
+      "targetsTitle": "Qué incluir en el backup",
+      "nimbusdeskDb": "Base de datos NimbusDesk",
+      "nimbusauthDb": "Base de datos NimbusAuth",
+      "executeButton": "Ejecutar Backup",
+      "executeHint": "Puede demorar algunos minutos, según el tamaño de los bancos de datos. No cierre esta página mientras el backup esté en curso.",
+      "noSelection": "Seleccione al menos un elemento para incluir en el backup.",
+      "executed": "Backup generado con éxito — la descarga debería comenzar automáticamente.",
+      "executeError": "No fue posible generar el backup. Intente nuevamente."
+    }
+  },
+  "notFound": {
+    "attemptedUrl": "URL accedida",
+    "goHome": "Ir al dashboard",
+    "title": "Página no encontrada",
+    "hint": "Si llegaste aquí por un enlace del sistema, revisa el registro de la ruta o el elemento de menú correspondiente.",
+    "message": "La ruta informada no existe o fue eliminada. Verifica la dirección accedida o vuelve al dashboard."
+  },
+  "dashboard": {
+    "subtitle": "Panel inicial",
+    "empty": "Dashboard en construcción",
+    "emptyHint": "Ningún módulo de negocio configurado todavía. Este espacio mostrará los indicadores del NimbusDesk en cuanto haya datos."
+  }
+}

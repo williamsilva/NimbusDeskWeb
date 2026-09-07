@@ -1,0 +1,319 @@
+@use './assets/nimbusdesk.scss';
+
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
+
+/* Ajustes mínimos do app */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+  /* combina com o fundo do app (evita flash branco atrás da status bar translúcida no iOS -
+     ver apple-mobile-web-app-status-bar-style=black-translucent no index.html). */
+  background-color: var(--surface-ground);
+}
+
+body {
+  margin: 0;
+  /* "cara de app", não de site: sem puxar-pra-atualizar/bounce de borracha ao chegar no fim da
+     rolagem (o maior "cheiro de navegador" que existe), sem o flash cinza ao tocar em
+     botões/links (herdado do estilo padrão de toque do navegador mobile). */
+  overscroll-behavior-y: contain;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Botões de ação do cs-page-header (Atualizar/Novo.../etc, projetados via <ng-content> - cada
+ * tela declara os próprios botões, cs-page-header não controla o conteúdo diretamente, por
+ * isso é global e não um estilo do próprio componente) viram só ícone no mobile - cara de app
+ * (barra de ações compacta), não de site. "Visually hidden" (não display:none) pra manter o
+ * texto acessível pra leitor de tela - só o rótulo VISUAL some, o nome acessível do botão
+ * continua o mesmo. */
+@media (max-width: 768px) {
+  cs-page-header .p-button-label {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  cs-page-header .p-button {
+    width: 2.25rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center;
+  }
+}
+
+/* Remove o delay de ~300ms + double-tap-to-zoom em áreas clicáveis - mantém o pinch-zoom geral
+ * intacto (acessibilidade), só tira o zoom por toque duplo em botões/links/nav. */
+button,
+a,
+[role='button'] {
+  touch-action: manipulation;
+}
+
+/* (opcional) suaviza fontes no dark */
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}
+
+/* ===== NimbusDesk Tech Theme (global) ===== */
+
+:root {
+  --cs-glow-a: rgba(59, 130, 246, 0.35);
+  --cs-glow-b: rgba(168, 85, 247, 0.28);
+  --cs-glow-c: rgba(20, 184, 166, 0.22);
+  --cs-card-light: rgba(255, 255, 255, 0.62);
+  --cs-card-dark: rgba(17, 24, 39, 0.52);
+  --cs-border-light: rgba(0, 0, 0, 0.08);
+  --cs-border-dark: rgba(255, 255, 255, 0.12);
+}
+
+.cs-tech-bg {
+  min-height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(1100px 650px at 12% -8%, var(--cs-glow-a), transparent 58%),
+    radial-gradient(900px 520px at 90% 2%, var(--cs-glow-b), transparent 55%),
+    radial-gradient(900px 520px at 50% 110%, var(--cs-glow-c), transparent 55%),
+    var(--surface-ground);
+}
+
+/* noise overlay (bem sutil) */
+.cs-tech-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.cs-glass {
+  background: var(--cs-card-light);
+  border: 1px solid var(--cs-border-light);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+}
+
+:root.dark .cs-glass {
+  background: var(--cs-card-dark);
+  border: 1px solid var(--cs-border-dark);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+/* Glow ring para itens ativos */
+.cs-glow-ring {
+  box-shadow:
+    0 10px 28px rgba(59, 130, 246, 0.18),
+    0 0 0 1px rgba(59, 130, 246, 0.22) inset;
+}
+
+:root.dark .cs-glow-ring {
+  box-shadow:
+    0 14px 34px rgba(59, 130, 246, 0.22),
+    0 0 0 1px rgba(59, 130, 246, 0.26) inset;
+}
+
+/* ===== Toast (PrimeNG) — Sakai skin + NimbusDesk product ===== */
+
+.cs-toast {
+  width: 420px;
+}
+
+@media (max-width: 768px) {
+  .cs-toast {
+    width: 95vw;
+  }
+}
+
+/* Base container (message template uses cs-toast-content) */
+.cs-toast-content {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--surface-card) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--surface-border) 70%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+
+  /* animação Sakai-like (entrada suave) */
+  animation: cs-toast-in 220ms ease-out;
+}
+
+@keyframes cs-toast-in {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cs-toast-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cs-toast-summary {
+  font-weight: 900;
+  line-height: 1.15rem;
+}
+
+.cs-toast-detail {
+  opacity: 0.9;
+  line-height: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .cs-toast-content {
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+  .cs-toast-summary {
+    font-size: 0.95rem;
+  }
+  .cs-toast-detail {
+    font-size: 0.9rem;
+  }
+}
+
+/* Severity bar (left border) */
+.cs-toast-content.cs-toast-success {
+  border-left: 5px solid var(--green-500);
+}
+.cs-toast-content.cs-toast-info {
+  border-left: 5px solid var(--blue-500);
+}
+.cs-toast-content.cs-toast-warn {
+  border-left: 5px solid var(--orange-500);
+}
+.cs-toast-content.cs-toast-error {
+  border-left: 5px solid var(--red-500);
+}
+
+/* Context background tint (subtle) */
+.cs-toast-content.cs-toast-crud {
+  background: color-mix(in srgb, var(--green-500) 6%, var(--surface-card));
+}
+.cs-toast-content.cs-toast-login {
+  background: color-mix(in srgb, var(--blue-500) 6%, var(--surface-card));
+}
+.cs-toast-content.cs-toast-validation {
+  background: color-mix(in srgb, var(--orange-500) 6%, var(--surface-card));
+}
+.cs-toast-content.cs-toast-system {
+  background: color-mix(in srgb, var(--surface-500) 4%, var(--surface-card));
+}
+
+/* Correlation + copy button */
+.cs-toast-correlation {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cs-toast-correlation .corr-k {
+  font-weight: 900;
+  opacity: 0.7;
+}
+
+.cs-toast-copy {
+  border: 0;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.cs-toast-copy:hover {
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+}
+
+/* Subtle "Copied!" indicator */
+.cs-toast-copied {
+  font-size: 0.78rem;
+  font-weight: 900;
+  opacity: 0.85;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-color) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 22%, transparent);
+}
+
+/* Progress bar (Sakai-like) — uses CSS var --cs-life injected per message */
+.cs-toast-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  opacity: 0.9;
+}
+
+.cs-toast-progress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(1);
+  background: color-mix(in srgb, var(--primary-color) 55%, transparent);
+  animation: cs-toast-progress var(--cs-life, 3500ms) linear forwards;
+}
+
+/* match progress color to severity */
+.cs-toast-content.cs-toast-success .cs-toast-progress::after {
+  background: color-mix(in srgb, var(--green-500) 70%, transparent);
+}
+.cs-toast-content.cs-toast-info .cs-toast-progress::after {
+  background: color-mix(in srgb, var(--blue-500) 70%, transparent);
+}
+.cs-toast-content.cs-toast-warn .cs-toast-progress::after {
+  background: color-mix(in srgb, var(--orange-500) 75%, transparent);
+}
+.cs-toast-content.cs-toast-error .cs-toast-progress::after {
+  background: color-mix(in srgb, var(--red-500) 75%, transparent);
+}
+
+@keyframes cs-toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Optional generic separator (if used elsewhere) */
+.separator {
+  margin: 0 6px;
+  opacity: 0.6;
+}

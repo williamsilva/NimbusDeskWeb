@@ -1,0 +1,620 @@
+{
+  "app": {
+    "name": "NimbusDesk"
+  },
+  "routes": {
+    "security": {
+      "users": {
+        "title": "Users"
+      },
+      "groups": {
+        "title": "Groups"
+      },
+      "accountProfile": {
+        "title": "My Account"
+      },
+      "accountPassword": {
+        "title": "Change password"
+      },
+      "groupDetail": {
+        "title": "Group detail"
+      }
+    },
+    "settings": {
+      "email": {
+        "title": "E-mail"
+      },
+      "backup": {
+        "title": "Backup"
+      },
+      "emailLog": {
+        "title": "Email Audit"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "forbidden": {
+      "title": "Access denied"
+    },
+    "notFound": {
+      "title": "Page not found"
+    }
+  },
+  "topbar": {
+    "online": "Online",
+    "brandName": "NimbusDesk",
+    "brandSub": "Product base",
+    "sidebarToggleAria": "Show/hide menu",
+    "sidebarShowTooltip": "Show menu",
+    "sidebarHideTooltip": "Hide menu",
+    "themeToggleAria": "Toggle theme",
+    "langAria": "Select language",
+    "sessionExpired": "Session expired",
+    "sessionExpireTooltip": "Session expires due to inactivity",
+    "sessionExpiredTooltip": "Log in again"
+  },
+  "menu": {
+    "me": "My account",
+    "more": "More",
+    "dashboard": "Dashboard",
+    "security": {
+      "title": "Security",
+      "groups": "Groups",
+      "users": "Users",
+      "myAccount": "My Account",
+      "changePassword": "Change Password"
+    },
+    "settings": {
+      "title": "Settings",
+      "email": "Email Settings",
+      "backup": "Backup",
+      "emailLog": "Email Audit"
+    }
+  },
+  "sidebar": {
+    "userFallback": "User",
+    "logout": "Log out"
+  },
+  "breadcrumb": {
+    "groups": "Groups",
+    "users": "Users",
+    "dashboard": {
+      "title": "Dashboard"
+    }
+  },
+  "footer": {
+    "copyright": "NimbusDesk",
+    "madeWith": "All rights reserved."
+  },
+  "filters": {
+    "activeCount": "{count, plural, =0 {No active filters} one {# active filter} other {# active filters}}",
+    "noneActive": "No active filters"
+  },
+  "pagination": {
+    "emptymessage": "No data found to display!",
+    "report": "Showing '{first}' to '{last}' of '{totalRecords}' records"
+  },
+  "validation": {
+    "invalid": "Invalid value",
+    "required": "Required",
+    "minLength": "Minimum of {requiredLength} characters",
+    "maxLength": "Maximum of {requiredLength} characters",
+    "email": "Invalid e-mail",
+    "pattern": "Invalid format",
+    "min": "Minimum value is {min}",
+    "max": "Maximum value is {max}",
+    "uuid": "Invalid identifier",
+    "document": "Invalid document",
+    "passwordPolicy": "Password does not meet the policy",
+    "server": "{message}"
+  },
+  "users": {
+    "subtitle": "Manage users, statuses, and invitations",
+    "new": {
+      "title": "New user",
+      "subtitle": "User registration"
+    },
+    "edit": {
+      "title": "Edit user",
+      "subtitle": "User editing"
+    },
+    "fields": {
+      "name": "Name",
+      "status": "Status",
+      "groups": "Groups",
+      "userName": "User",
+      "document": "Document",
+      "createdAt": "Registered on",
+      "periodCreatedAt": "Registration period",
+      "lastLoginAt": "Last login",
+      "periodLastLoginAt": "Last login period",
+      "blockedUntil": "Blocked until",
+      "periodBlockedUntil": "Block period",
+      "passwordExpiresAt": "Password expires",
+      "periodPasswordExpiresAt": "Password expiration period",
+      "createdBy": "Registered by"
+    },
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "userName": "Username",
+      "document": "Document",
+      "createdAt": "Registered on",
+      "lastLoginAt": "Last login",
+      "blockedUntil": "Blocked until",
+      "passwordExpiresAt": "Password expires",
+      "createdBy": "Registered by"
+    },
+    "form": {
+      "loadError": "Could not load user data",
+      "saveError": "Could not save the user.",
+      "created": "User created successfully.",
+      "updated": "User updated successfully",
+      "resend": {
+        "button": "Resend password e-mail",
+        "header": "Resend e-mail",
+        "message": "Do you want to resend the password registration e-mail?",
+        "sent": "E-mail sent successfully.",
+        "error": "Could not resend the e-mail.",
+        "todoServer": "Feature pending on the server."
+      }
+    },
+    "status": {
+      "null": "N/A",
+      "active": "Active",
+      "inactive": "Inactive",
+      "blocked": "Blocked",
+      "disabled": "Disabled",
+      "pending_password": "Password pending",
+      "unknown": "Unknown"
+    },
+    "invite": {
+      "resend": "Resend invite",
+      "resent": "Invite resent successfully.",
+      "resendError": "Could not resend the invite."
+    },
+    "delete": {
+      "header": "Confirm deletion",
+      "success": "User deactivated successfully",
+      "message": "Do you want to delete user {userName}?"
+    },
+    "activate": {
+      "selected": "Activate",
+      "header": "Confirm activation",
+      "successSingle": "User activated successfully.",
+      "successBulk": "{count, plural, one {# user activated successfully.} other {# users activated successfully.}}",
+      "messageSingle": "Do you want to activate user {userName}?",
+      "messageBulk": "{count, plural, one {Do you want to activate # selected user?} other {Do you want to activate # selected users?}}"
+    },
+    "deactivate": {
+      "selected": "Deactivate",
+      "header": "Confirm deactivation",
+      "successSingle": "User deactivated successfully.",
+      "successBulk": "{count, plural, one {# user deactivated successfully.} other {# users deactivated successfully.}}",
+      "messageSingle": "Do you want to deactivate user {userName}?",
+      "messageBulk": "{count, plural, one {Do you want to deactivate # selected user?} other {Do you want to deactivate # selected users?}}"
+    },
+    "selection": {
+      "currentMode": "Selection mode",
+      "count": "{count, plural, =0 {None selected} one {# selected} other {# selected}}",
+      "pickOneFirst": "First select an eligible user to define the selection context.",
+      "mode": {
+        "none": "None",
+        "activate": "Bulk activation",
+        "deactivate": "Bulk deactivation"
+      }
+    },
+    "action": {
+      "activate": {
+        "label": "Activate",
+        "noPermission": "You do not have permission to activate users.",
+        "protected": "Protected user cannot be activated by this action.",
+        "invalidStatus": "Only inactive users can be activated."
+      },
+      "deactivate": {
+        "label": "Deactivate",
+        "noPermission": "You do not have permission to deactivate users.",
+        "self": "You cannot deactivate your own user.",
+        "protected": "Protected user cannot be deactivated.",
+        "invalidStatus": "Only active users can be deactivated."
+      }
+    },
+    "empty": {
+      "title": "No user found"
+    }
+  },
+  "enum": {
+    "periodEnum": {
+      "day": "Day",
+      "year": "Year",
+      "month": "Month",
+      "end": "End",
+      "start": "Start",
+      "interval": "Interval"
+    }
+  },
+  "accountPassword": {
+    "title": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "passwordMismatch": "Passwords must match.",
+    "policyTitle": "Password policy",
+    "submit": "Save password",
+    "successTitle": "Password changed",
+    "successMessage": "Your password has been updated successfully.",
+    "footer": "© 2026 NimbusDesk • All rights reserved",
+    "formSubtitle": "Enter your current password and set a new secure password.",
+    "policySubtitle": "The password must comply with the security rules below.",
+    "formSectionTitle": "Change details",
+    "userFallback": "User",
+    "usernameFallback": "No user",
+    "summary": {
+      "rules": "Rules",
+      "strength": "Strength",
+      "valid": "Valid rules",
+      "invalid": "Invalid rules",
+      "minLength": "Minimum length"
+    },
+    "strength": {
+      "title": "Password strength",
+      "empty": "Not informed",
+      "weak": "Weak",
+      "medium": "Medium",
+      "strong": "Strong",
+      "rulesSatisfied": "rules satisfied"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "View your profile and registration data.",
+    "card": {
+      "userData": "User data",
+      "groups": "Groups",
+      "permissions": "Permissions",
+      "groupsSubtitle": "Organizational profiles linked to the user.",
+      "permissionsSubtitle": "Access available for the authenticated user."
+    },
+    "permissionDescription": {
+      "SUPPORT": "Full system support",
+      "USERS_CONSULT": "View users",
+      "USERS_CREATE": "Create users",
+      "USERS_DELETE": "Delete users",
+      "USERS_CHANGE": "Edit users",
+      "USERS_ACTIVE_OR_INACTIVE": "Activate or deactivate users",
+      "GROUPS_CONSULT": "View groups",
+      "GROUPS_CREATE": "Create groups",
+      "GROUPS_DELETE": "Delete groups",
+      "GROUPS_CHANGE": "Edit groups",
+      "GROUPS_MANAGEMENT_USER": "Add user to group",
+      "GROUPS_ACTIVE_OR_INACTIVE": "Activate or deactivate groups",
+      "GROUPS_MANAGEMENT_PERMISSION": "Add permission to group",
+      "EMAIL_SETTINGS_CONSULT": "View email settings",
+      "EMAIL_SETTINGS_PROCESS": "Edit email settings",
+      "EMAIL_LOG_CONSULT": "View sent emails",
+      "BACKUP_PROCESS": "Trigger manual database backup"
+    },
+    "section": {
+      "identification": "Identification",
+      "security": "Security",
+      "audit": "Audit"
+    },
+    "field": {
+      "id": "ID",
+      "name": "Name",
+      "username": "User",
+      "document": "Document",
+      "status": "Status",
+      "blocked": "Blocked",
+      "blockedUntil": "Blocked until",
+      "password": "Password",
+      "passwordExpires": "Password expires on",
+      "issuer": "Issuer",
+      "createdAt": "Created on",
+      "lastLogin": "Last login",
+      "groups": "Groups",
+      "permissions": "Permissions"
+    },
+    "button": {
+      "changePassword": "Change password"
+    },
+    "fallback": {
+      "noName": "User without name",
+      "noUsername": "User not informed"
+    },
+    "items": "{count, plural, =0 {0 items} one {# item} other {# items}}",
+    "empty": {
+      "groups": "No group informed.",
+      "permissions": "No permission found."
+    },
+    "loading": "Please wait while we load the profile data.",
+    "error": "Could not load the profile."
+  },
+  "groups": {
+    "subtitle": "Manage groups and access permissions",
+    "new": {
+      "title": "New group",
+      "subtitle": "Group registration"
+    },
+    "edit": {
+      "title": "Edit group",
+      "subtitle": "Group editing"
+    },
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "createdAt": "Registered on",
+      "periodCreatedAt": "Registration period",
+      "createdBy": "Registered by"
+    },
+    "columns": {
+      "name": "Name",
+      "usersCount": "Users",
+      "description": "Description",
+      "createdAt": "Registered on",
+      "createdBy": "Registered by",
+      "permissionsCount": "Permissions"
+    },
+    "form": {
+      "loadError": "Could not load group data.",
+      "saveError": "Could not save the group.",
+      "created": "Group created successfully.",
+      "updated": "Group updated successfully.",
+      "permissionDenied": "You do not have permission to save groups."
+    },
+    "empty": {
+      "title": "No group found"
+    },
+    "action": {
+      "create": {
+        "noPermission": "You do not have permission to create groups."
+      },
+      "edit": {
+        "noPermission": "You do not have permission to edit groups."
+      },
+      "delete": {
+        "noPermission": "You do not have permission to delete groups."
+      }
+    },
+    "detail": {
+      "title": "Group detail",
+      "subtitle": "Summary, permissions, and users of the group",
+      "tabs": {
+        "summary": "Summary",
+        "permissions": "Permissions",
+        "users": "Users"
+      },
+      "permissions": {
+        "title": "Permissions",
+        "subtitle": "Associate or disassociate permissions from this group.",
+        "placeholder": "Select permissions",
+        "saved": "Permissions updated successfully.",
+        "saveError": "Could not save group permissions.",
+        "empty": "No permission assigned.",
+        "removeConfirm": {
+          "action": "Remove from group",
+          "header": "Remove permission from group",
+          "message": "Are you sure you want to remove permission {permissionName} from this group?",
+          "success": "Permission removed from the group successfully."
+        }
+      },
+      "users": {
+        "title": "Users",
+        "manageHint": "Members and group membership are managed from the Users screen.",
+        "subtitle": "Associate or disassociate users from this group.",
+        "placeholder": "Select users",
+        "saved": "Users updated successfully.",
+        "saveError": "Could not save group users.",
+        "empty": "No user assigned.",
+        "removeConfirm": {
+          "action": "Remove from group",
+          "header": "Remove user from group",
+          "message": "Are you sure you want to remove {userName} from this group?",
+          "success": "User removed from the group successfully."
+        }
+      }
+    },
+    "delete": {
+      "header": "Delete group",
+      "message": "Do you really want to delete group {groupName}?",
+      "success": "Group deleted successfully."
+    }
+  },
+  "session": {
+    "expiring": {
+      "title": "Session will expire",
+      "body": "Your session will expire due to inactivity in",
+      "hint": "Click “Renew” to continue without reloading the page."
+    },
+    "expired": {
+      "title": "Session expired",
+      "body": "Your session expired due to inactivity.",
+      "hint": "To continue, log in again."
+    }
+  },
+  "common": {
+    "no": "No",
+    "add": "Add",
+    "to": "to",
+    "yes": "Yes",
+    "new": "New",
+    "all": "All",
+    "until": "Until",
+    "error": "Error",
+    "action": "Action",
+    "save": "Save",
+    "edit": "Edit",
+    "back": "Back",
+    "logout": "Log out",
+    "close": "Close",
+    "clear": "Clear",
+    "quantity": "Qty.",
+    "status": "Status",
+    "apply": "Apply",
+    "actions": "Actions",
+    "filter": "Filter",
+    "remove": "Remove",
+    "period": "Period",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "activate": "Activate",
+    "success": "Success",
+    "info": "Information",
+    "warning": "Warning",
+    "view": "View",
+    "notNow": "Not now",
+    "from": "From",
+    "update": "Update",
+    "confirm": "Confirm",
+    "deactivate": "Deactivate",
+    "loading": "Loading...",
+    "goToLogin": "Go to login",
+    "notInformed": "Not informed",
+    "tableFilters": "Table filters",
+    "renewSession": "Renew session",
+    "correlationId": "Correlation ID",
+    "notInformedFemale": "Not informed",
+    "advancedFilters": "Advanced filters",
+    "noRecordsFound": "No records found.",
+    "selected": "{count, plural, =0 {None selected} one {# selected} other {# selected}}",
+    "selectedFemale": "{count, plural, =0 {None selected} one {# selected} other {# selected}}",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "confirm": {
+    "logoutTitle": "End session",
+    "logoutMessage": "Do you really want to log out of NimbusDesk?"
+  },
+  "notifications": {
+    "welcome": "Hello, {name}!",
+    "itemsCount": "{count, plural, =0 {No item} one {# item} other {# items}}"
+  },
+  "errors": {
+    "global": {
+      "GENERIC_ERROR": "An unexpected error occurred. Try again.",
+      "NETWORK_ERROR": "Could not connect to the server.",
+      "ACCESS_DENIED": "You do not have permission to perform this action.",
+      "SESSION_EXPIRED": "Your session has expired. Log in again.",
+      "VALIDATION_ERROR": "Some fields need to be corrected.",
+      "USER_NOT_FOUND": "User not found.",
+      "USER_DOCUMENT_ALREADY_EXISTS": "A user with this document already exists.",
+      "USER_USERNAME_ALREADY_EXISTS": "A user with this username already exists.",
+      "USER_DELETE_NOT_ALLOWED": "This user cannot be deleted.",
+      "USER_UPDATE_NOT_ALLOWED": "This user cannot be edited.",
+      "NOT_FOUND": "Resource not found.",
+      "INTERNAL_ERROR": "An internal error occurred. Try again.",
+      "GROUP_NAME_ALREADY_EXISTS": "A group with this name already exists.",
+      "GROUP_DELETE_SUPPORT_NOT_ALLOWED": "The SUPPORT group cannot be deleted or changed in this operation.",
+      "GROUP_DELETE_IN_USE": "This group has associated users and cannot be deleted.",
+      "GROUP_USER_WOULD_BE_ORPHANED": "Cannot remove this user: they would be left without any group in this system. Add them to another group before removing them from here.",
+      "PERMISSION_NOT_FOUND": "One or more informed permissions were not found."
+    },
+    "fields": {
+      "*": {
+        "required": "{label} is required.",
+        "minLength": "{label} must have at least {requiredLength} characters.",
+        "maxLength": "{label} must have at most {requiredLength} characters.",
+        "min": "{label} must be at least {min}.",
+        "max": "{label} must be at most {max}.",
+        "email": "{label} must be a valid e-mail.",
+        "pattern": "{label} has an invalid format.",
+        "invalid": "{label} is invalid.",
+        "passwordMismatch": "Passwords must match.",
+        "duplicate": "{label} already registered."
+      }
+    }
+  },
+  "email": {
+    "settings": {
+      "subtitle": "Email sending provider configuration.",
+      "impl": "Implementation",
+      "implHint": "Defines the email provider. FAKE logs emails (development), SMTP uses a configured mail server, API_KEY uses the configured provider's REST API (currently: Brevo).",
+      "fromName": "Sender name",
+      "fromNameHint": "Name displayed in the 'From' field of sent emails.",
+      "fromEmail": "Sender email",
+      "fromEmailHint": "Email address displayed in the 'From' field.",
+      "brevoTitle": "API Key Settings",
+      "brevoApiKey": "API Key",
+      "brevoApiKeyHint": "Authentication key for the provider's API (currently: Brevo). Required when the implementation is API_KEY.",
+      "brevoBaseUrl": "API base URL",
+      "brevoBaseUrlHint": "Provider API base URL (currently: Brevo).",
+      "smtpTitle": "SMTP Settings",
+      "smtpHost": "SMTP Host",
+      "smtpHostHint": "Mail server address (e.g. smtp.gmail.com).",
+      "smtpPort": "Port",
+      "smtpPortHint": "SMTP server port. Default: 587 (STARTTLS) or 465 (SSL).",
+      "smtpUsername": "Username",
+      "smtpUsernameHint": "Username for SMTP authentication, usually the email address itself.",
+      "smtpPassword": "Password",
+      "smtpPasswordHint": "Password for SMTP server authentication.",
+      "smtpAuth": "Authentication",
+      "smtpAuthHint": "Enables SMTP authentication with username and password.",
+      "smtpStarttls": "STARTTLS",
+      "smtpStarttlsHint": "Enables connection upgrade to TLS using STARTTLS. Recommended for port 587.",
+      "smtpSsl": "SSL/TLS",
+      "smtpSslHint": "Enables direct SSL/TLS connection. Recommended for port 465.",
+      "saved": "Email settings saved successfully.",
+      "saveError": "Could not save email settings."
+    }
+  },
+  "emailLog": {
+    "subtitle": "Record of every email sent by the system - recipients, subject, status and body.",
+    "columns": {
+      "recipients": "Recipients",
+      "subject": "Subject",
+      "eventType": "Event",
+      "status": "Status",
+      "sentAt": "Sent at",
+      "errorMessage": "Error"
+    },
+    "fields": {
+      "recipients": "Recipients",
+      "subject": "Subject",
+      "eventType": "Event",
+      "status": "Status",
+      "sentAt": "Sent at",
+      "periodSentAt": "Sent period"
+    },
+    "status": {
+      "SENT": "Sent",
+      "FAILED": "Send failed"
+    },
+    "empty": {
+      "title": "No emails registered"
+    },
+    "detail": {
+      "title": "Email details",
+      "recipients": "Recipients",
+      "subject": "Subject",
+      "template": "Template",
+      "body": "Body",
+      "noBody": "Body not available for emails sent before this version."
+    }
+  },
+  "backup": {
+    "settings": {
+      "subtitle": "Generates an on-demand backup of the databases, for immediate download.",
+      "targetsTitle": "What to include in the backup",
+      "nimbusdeskDb": "NimbusDesk database",
+      "nimbusauthDb": "NimbusAuth database",
+      "executeButton": "Run Backup",
+      "executeHint": "May take a few minutes depending on the size of the databases. Do not close this page while the backup is running.",
+      "noSelection": "Select at least one item to include in the backup.",
+      "executed": "Backup generated successfully — the download should start automatically.",
+      "executeError": "Could not generate the backup. Please try again."
+    }
+  },
+  "notFound": {
+    "attemptedUrl": "Accessed URL",
+    "goHome": "Go to dashboard",
+    "title": "Page not found",
+    "hint": "If you arrived here through a system link, review the route registration or the corresponding menu item.",
+    "message": "The informed route does not exist or has been removed. Check the accessed address or go back to the dashboard."
+  },
+  "dashboard": {
+    "subtitle": "Home",
+    "empty": "Dashboard under construction",
+    "emptyHint": "No business module configured yet. This space will show NimbusDesk's metrics once data is available."
+  }
+}

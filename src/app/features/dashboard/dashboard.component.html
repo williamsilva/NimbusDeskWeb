@@ -1,0 +1,13 @@
+<app-page-header [subtitle]="'dashboard.subtitle' | translate"></app-page-header>
+
+<div class="flex justify-content-center mt-4">
+  <div class="w-full" style="max-width: 32rem">
+    <p-card>
+      <div class="flex flex-column align-items-center text-center gap-2 py-4">
+        <i class="pi pi-inbox text-4xl opacity-50"></i>
+        <div class="text-lg font-semibold">{{ 'dashboard.empty' | translate }}</div>
+        <div class="text-sm text-color-secondary">{{ 'dashboard.emptyHint' | translate }}</div>
+      </div>
+    </p-card>
+  </div>
+</div>

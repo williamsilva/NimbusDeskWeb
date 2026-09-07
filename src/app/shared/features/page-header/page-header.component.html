@@ -1,0 +1,46 @@
+<div class="flex flex-column gap-0 mb-1">
+  @if (hasBreadcrumb()) {
+    <div class="flex align-items-center gap-1 text-500 text-2xs mb-0">
+      @for (item of breadcrumb; track $index) {
+        @if (item.url) {
+          <a
+            class="text-primary no-underline hover:underline cursor-pointer"
+            [routerLink]="item.url"
+          >
+            {{ item.label }}
+          </a>
+        } @else {
+          <span>{{ item.label }}</span>
+        }
+
+        @if ($index < breadcrumb.length - 1) {
+          <i class="pi pi-angle-right text-2xs"></i>
+        }
+      }
+    </div>
+  }
+
+  <div
+    class="flex flex-column md:flex-row align-items-start md:align-items-center justify-content-between gap-2"
+  >
+    <div class="min-w-0">
+      <div class="font-semibold text-base" style="line-height: 1.2">
+        {{ title }}
+      </div>
+
+      @if (subtitle) {
+        <div class="text-500 text-xs" style="line-height: 1.2">
+          {{ subtitle }}
+        </div>
+      }
+    </div>
+
+    <!-- -mt-3 só no desktop (md:flex-row, título/subtítulo e botões lado a lado - a margem
+         negativa alinha verticalmente contra o bloco de título/subtítulo). No mobile
+         (md:flex-column acima - os botões empilham ABAIXO do título/subtítulo) essa mesma
+         margem negativa "puxava" os botões pra cima, sobrepondo o subtítulo (bug reportado). -->
+    <div class="flex align-items-start gap-2 md:-mt-3">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

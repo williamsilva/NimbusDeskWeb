@@ -1,0 +1,71 @@
+{
+  "name": "nimbusdesk",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "validate:i18n": "node scripts/validate-i18n.js",
+    "validate:i18n:watch": "nodemon -q -e json --watch src/assets/i18n --watch src/assets/i18n/primeng --exec \"npm run validate:i18n\"",
+    "dev": "npm run validate:i18n && concurrently -k \"ng serve\" \"npm run validate:i18n:watch\"",
+    "build:checked": "npm run validate:i18n && npm run build",
+    "build:pages": "npm run validate:i18n && ng build --configuration production",
+    "pages:preview": "npx wrangler pages dev dist/nimbusdesk/browser",
+    "build:pwa-local": "ng build --configuration pwaLocal",
+    "pwa-local:preview": "npm run build:pwa-local && npx serve -s dist/nimbusdesk/browser -l 4201",
+    "lint": "ng lint"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.7.0",
+  "dependencies": {
+    "@angular/animations": "^21.1.5",
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/forms": "^21.1.0",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@angular/service-worker": "^21.1.5",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "@primeng/themes": "^21.0.4",
+    "@williamsilva/nimbus-web-commons": "^0.2.1",
+    "intl-messageformat": "^11.1.2",
+    "ngx-translate-messageformat-compiler": "^7.2.0",
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.1"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.1.0",
+    "@angular/cli": "^21.1.0",
+    "@angular/compiler-cli": "^21.1.0",
+    "@eslint/js": "^10.0.1",
+    "@messageformat/core": "^3.4.0",
+    "@tailwindcss/postcss": "^4.2.0",
+    "angular-eslint": "22.2.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.9.0",
+    "nodemon": "^3.1.14",
+    "prettier": "3.9.6",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.67.0"
+  }
+}

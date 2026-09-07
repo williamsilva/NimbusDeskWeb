@@ -1,0 +1,21 @@
+<app-topbar class="topbar-wrapper" [bottomNavPresent]="true"></app-topbar>
+
+<div class="shell" [class.sidebar-collapsed]="!sidebarVisible()">
+  @if (sidebarVisible()) {
+    <!-- No mobile (ver CSS) isto vira um overlay de tela cheia, não uma coluna do grid - o
+         fundo escurecido abaixo só existe/aparece nesse breakpoint (display:none no desktop). -->
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- scrim decorativo (fecha ao clicar fora), não é conteúdo nem ação alcançável só por teclado -->
+    <div class="sidebar-backdrop" (click)="closeSidebarOverlay()"></div>
+    <app-sidebar class="sidebar-host"></app-sidebar>
+  }
+
+  <main class="content">
+    <div class="content-inner cs-glass">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+
+<app-footer class="footer-fixed" [class.sidebar-collapsed]="!sidebarVisible()"></app-footer>
+
+<app-bottom-nav></app-bottom-nav>

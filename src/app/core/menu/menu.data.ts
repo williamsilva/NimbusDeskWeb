@@ -1,0 +1,61 @@
+import { PERMISSIONS } from '@core/auth/permissions.constants';
+
+import { AppMenuItem } from './menu.model';
+
+export const APP_MENU: AppMenuItem[] = [
+  {
+    icon: 'pi pi-home text-blue-600',
+    labelKey: 'menu.dashboard',
+    route: '/dashboard',
+    exact: true,
+  },
+  /* Security — cor vermelha */
+  {
+    icon: 'pi pi-shield text-red-600',
+    labelKey: 'menu.security.title',
+    children: [
+      {
+        labelKey: 'menu.security.users',
+        icon: 'pi pi-user text-red-400',
+        route: '/security/users',
+        exact: false,
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.USERS.VIEW],
+      },
+      {
+        labelKey: 'menu.security.groups',
+        icon: 'pi pi-id-card text-red-400',
+        route: '/security/groups',
+        exact: false,
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.GROUPS.VIEW],
+      },
+    ],
+  },
+  /* Settings — cor indigo */
+  {
+    icon: 'pi pi-cog text-indigo-600',
+    labelKey: 'menu.settings.title',
+    children: [
+      {
+        exact: false,
+        route: '/settings/email',
+        labelKey: 'menu.settings.email',
+        icon: 'pi pi-envelope text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETTINGS.EMAIL_VIEW],
+      },
+      {
+        exact: false,
+        route: '/settings/backup',
+        labelKey: 'menu.settings.backup',
+        icon: 'pi pi-database text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETTINGS.BACKUP_PROCESS],
+      },
+      {
+        exact: false,
+        route: '/settings/email-log',
+        labelKey: 'menu.settings.emailLog',
+        icon: 'pi pi-history text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETTINGS.EMAIL_LOG_VIEW],
+      },
+    ],
+  },
+];

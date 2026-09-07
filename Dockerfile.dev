@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1
+# Container de desenvolvimento - roda o Angular dev server (ng serve) com live-reload a partir do
+# código montado como volume (ver ../docker-compose.yml). Diferente do Dockerfile "de produção"
+# (build otimizado servido via nginx, usado nos deploys reais e no preview local sem live-reload).
+FROM node:22-alpine
+WORKDIR /workspace
+# Nota (2026-09-07): achado real rodando docker compose build local depois da extração do
+# @williamsilva/nimbus-web-commons - "npm error 401 Unauthorized ... authentication token not
+# provided" no `npm ci`. O .npmrc do projeto precisa estar copiado ANTES do npm ci rodar, e
+# NODE_AUTH_TOKEN precisa virar variável de ambiente de verdade (ARG sozinho não basta) - mesmo
+# padrão ARG do backend (Gradle) pro GITHUB_ACTOR/GITHUB_TOKEN, ver Dockerfile do NimbusDeskServer.
+ARG NODE_AUTH_TOKEN
+ENV NODE_AUTH_TOKEN=$NODE_AUTH_TOKEN
+COPY package.json package-lock.json .npmrc ./
+RUN npm ci
+COPY . .
+EXPOSE 4204
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4204"]

@@ -1,0 +1,101 @@
+import { Injectable, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { ApiError } from './api-error.model';
+import { I18nService } from '../i18n/i18n.service';
+
+@Injectable({ providedIn: 'root' })
+export class ErrorMapperService {
+  private i18n = inject(I18nService);
+
+
+  ui(key: string, fallback?: string, params?: Record<string, unknown>): string {
+    return this.i18n.tUi(key as never, params, fallback);
+  }
+
+  titleForStatus(status?: number): string {
+    const lang = this.i18n.getLang();
+
+    if (lang === 'en') {
+      if (status === 400) return 'Validation';
+      if (status === 401) return 'Session expired';
+      if (status === 403) return 'Access denied';
+      if (status === 404) return 'Not found';
+      return 'Error';
+    }
+
+    if (lang === 'es') {
+      if (status === 400) return 'Validación';
+      if (status === 401) return 'Sesión expirada';
+      if (status === 403) return 'Acceso denegado';
+      if (status === 404) return 'No encontrado';
+      return 'Error';
+    }
+
+    if (status === 400) return 'Validação';
+    if (status === 401) return 'Sessão expirada';
+    if (status === 403) return 'Acesso negado';
+    if (status === 404) return 'Não encontrado';
+    return 'Erro';
+  }
+
+  normalize(err: unknown): ApiError {
+    const httpErr = err as HttpErrorResponse | undefined;
+    const e = httpErr?.error;
+    if (e && typeof e === 'object') return e as ApiError;
+
+    return {
+      status: httpErr?.status,
+      message: httpErr?.message,
+    };
+  }
+
+  /**
+   * `tErrorCodeLoose(code, fallback)` tenta traduzir `code` como uma chave i18n (ex.:
+   * "PASSWORD_CURRENT_INVALID") e só usa `fallback` quando não encontra - mas até esta correção,
+   * o fallback passado era sempre `e.message` (quase sempre ausente num corpo ProblemDetail RFC
+   * 7807, que só tem `detail`), então uma mensagem de negócio livre (ex.: "Client 'X' already has
+   * a voucher being negotiated (DEALING).") virava a chave i18n em si (nunca encontrada) e caía
+   * no genérico "Ocorreu um erro inesperado", descartando silenciosamente o texto real do backend.
+   * `e.message ?? e.code`/`e.message ?? e.detail` corrige isso: cai no próprio texto livre, não
+   * mais no genérico, quando não é de fato um código i18n conhecido.
+   */
+  message(e: ApiError | null | undefined): string {
+    if (!e) return this.i18n.tErrorCodeLoose('GENERIC_ERROR');
+
+    if (e.userMessage) return e.userMessage;
+    if (e.code) return this.i18n.tErrorCodeLoose(e.code, e.message ?? e.code);
+    if (e.detail) return this.i18n.tErrorCodeLoose(e.detail, e.message ?? e.detail);
+    if (e.message) return e.message;
+
+    return this.i18n.tErrorCodeLoose('GENERIC_ERROR');
+  }
+
+  fieldMessage(
+    field: string,
+    fieldCode?: string | null,
+    fallback?: string,
+    userMessage?: string,
+    params?: Record<string, unknown>,
+  ): string {
+    if (userMessage) return userMessage;
+
+    if (fieldCode) {
+      return this.i18n.tFieldErrorLoose(field, fieldCode, fallback, params);
+    }
+
+    return fallback ?? this.i18n.tErrorCodeLoose('GENERIC_ERROR');
+  }
+
+  fieldLabel(field?: string | null, namespaces: string[] = []): string {
+    if (!field) return '';
+
+    for (const ns of namespaces) {
+      const key = `${ns}.${field}`;
+      const translated = this.i18n.tUi(key as never, field);
+      if (translated && translated !== key) return translated;
+    }
+
+    return field;
+  }
+}
