@@ -1,0 +1,109 @@
+<app-page-header
+  [subtitle]="'slas.subtitle' | translate"
+  [breadcrumb]="[
+    { label: ('menu.settings.title' | translate), url: '/settings' },
+    { label: ('routes.settings.slas.title' | translate) },
+  ]"
+>
+  <button
+    pButton
+    type="button"
+    (click)="goNew()"
+    icon="pi pi-plus"
+    tooltipPosition="top"
+    [disabled]="!canChange()"
+    class="p-button-info p-button-sm"
+    [label]="'slas.new.title' | translate"
+    [pTooltip]="!canChange() ? ('slas.action.noPermission' | translate) : ''"
+  ></button>
+</app-page-header>
+
+<app-sla-form-dialog
+  [editing]="editing()"
+  [visible]="formVisible()"
+  (visibleChange)="onFormVisibleChange($event)"
+></app-sla-form-dialog>
+
+<div class="surface-card border-round px-3 pt-2 pb-3 mt-2">
+  <p-table
+    stripedRows
+    dataKey="id"
+    size="small"
+    showGridlines
+    [value]="items()"
+    [rowHover]="true"
+    [loading]="loading()"
+    class="cs-admin-table"
+  >
+    <ng-template pTemplate="colgroup">
+      <colgroup>
+        <col style="width: auto" />
+        <col style="width: 170px" />
+        <col style="width: 170px" />
+        <col style="width: 70px" />
+      </colgroup>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'slas.columns.nome' | translate">{{
+            'slas.columns.nome' | translate
+          }}</span>
+        </th>
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'slas.columns.tempoResposta' | translate">{{
+            'slas.columns.tempoResposta' | translate
+          }}</span>
+        </th>
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'slas.columns.tempoResolucao' | translate">{{
+            'slas.columns.tempoResolucao' | translate
+          }}</span>
+        </th>
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'common.actions' | translate">{{
+            'common.actions' | translate
+          }}</span>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td class="mobile-card-title">
+          <span class="cs-table-cell-ellipsis" tooltipPosition="top" [pTooltip]="row.nome">{{ row.nome }}</span>
+        </td>
+        <td class="text-center" [attr.data-label]="'slas.columns.tempoResposta' | translate">
+          {{ row.tempoRespostaMin }} min
+        </td>
+        <td class="text-center" [attr.data-label]="'slas.columns.tempoResolucao' | translate">
+          {{ row.tempoResolucaoMin }} min
+        </td>
+        <td class="text-center mobile-card-actions">
+          <div class="table-actions">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              (click)="goEdit(row)"
+              tooltipPosition="top"
+              [disabled]="!canChange()"
+              class="p-button-text p-button-sm"
+              [pTooltip]="canChange() ? ('common.edit' | translate) : ('slas.action.noPermission' | translate)"
+              [attr.aria-label]="'common.edit' | translate"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center py-5 opacity-70">
+          {{ loadedOnce() ? ('slas.empty.title' | translate) : ('common.loading' | translate) }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,177 @@
+<p-dialog
+  [modal]="true"
+  appendTo="body"
+  [closable]="false"
+  (onHide)="onHide()"
+  [draggable]="false"
+  [resizable]="false"
+  [visible]="visible()"
+  [style]="{ width: '46rem', maxWidth: '95vw' }"
+  [header]="'tickets.new.title' | translate"
+>
+  <form [formGroup]="form" class="cs-dialog-form">
+    <div class="grid formgrid gap-0">
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <input pInputText id="titulo" style="width: 100%" formControlName="titulo" />
+          <app-error-msg
+            [field]="'titulo'"
+            [forId]="'titulo'"
+            [control]="form.controls.titulo"
+            [label]="'tickets.fields.titulo' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2">
+        <app-error-msg
+          [field]="'descricao'"
+          [forId]="'descricao'"
+          [control]="form.controls.descricao"
+          [label]="'tickets.fields.descricao' | translate"
+        />
+        <app-rich-text-editor
+          formControlName="descricao"
+          class="block mt-1"
+          [height]="'220px'"
+        ></app-rich-text-editor>
+      </div>
+
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-select
+            size="small"
+            class="w-full"
+            [filter]="true"
+            appendTo="body"
+            inputId="categoriaId"
+            optionLabel="label"
+            optionValue="value"
+            [options]="categoryOptions()"
+            formControlName="categoriaId"
+          ></p-select>
+          <app-error-msg
+            [field]="'categoriaId'"
+            [forId]="'categoriaId'"
+            [control]="form.controls.categoriaId"
+            [label]="'tickets.fields.categoria' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-select
+            size="small"
+            class="w-full"
+            appendTo="body"
+            inputId="prioridade"
+            optionLabel="label"
+            optionValue="value"
+            [options]="priorityOptions()"
+            formControlName="prioridade"
+          ></p-select>
+          <app-error-msg
+            [field]="'prioridade'"
+            [forId]="'prioridade'"
+            [control]="form.controls.prioridade"
+            [label]="'tickets.fields.prioridade' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-select
+            size="small"
+            class="w-full"
+            [filter]="true"
+            appendTo="body"
+            [showClear]="true"
+            inputId="setorId"
+            optionLabel="label"
+            optionValue="value"
+            [options]="setorOptions()"
+            formControlName="setorId"
+          ></p-select>
+          <label for="setorId">{{ 'tickets.fields.setor' | translate }}</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-select
+            size="small"
+            class="w-full"
+            [filter]="true"
+            appendTo="body"
+            [showClear]="true"
+            inputId="equipamentoRefId"
+            optionLabel="label"
+            optionValue="value"
+            [options]="equipamentoOptions()"
+            formControlName="equipamentoRefId"
+          ></p-select>
+          <label for="equipamentoRefId">{{ 'tickets.fields.equipamento' | translate }}</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-multiSelect
+            class="w-full"
+            appendTo="body"
+            [filter]="true"
+            display="chip"
+            inputId="participantIds"
+            optionLabel="label"
+            optionValue="value"
+            [options]="participantOptions()"
+            formControlName="participantIds"
+          ></p-multiSelect>
+          <label for="participantIds">{{ 'tickets.participants.title' | translate }}</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2">
+        <input #attachmentsInput id="attachments" type="file" multiple hidden (change)="onFilesSelected($event)" />
+        <button
+          pButton
+          type="button"
+          icon="pi pi-paperclip"
+          class="p-button-text p-button-sm"
+          [label]="'tickets.fields.attachments' | translate"
+          (click)="attachmentsInput.click()"
+        ></button>
+        @if (selectedFiles().length) {
+          <span class="text-xs opacity-70 ml-2">
+            {{ selectedFiles().length }} {{ 'tickets.attachments.selected' | translate }}
+          </span>
+        }
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      type="button"
+      (click)="close()"
+      icon="pi pi-times"
+      class="p-button-text p-button-sm"
+      [label]="'common.cancel' | translate"
+      [disabled]="saving()"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      (click)="save()"
+      icon="pi pi-save"
+      class="p-button-sm"
+      [loading]="saving()"
+      [label]="'common.save' | translate"
+      [disabled]="saving()"
+    ></button>
+  </ng-template>
+</p-dialog>

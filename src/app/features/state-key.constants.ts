@@ -28,5 +28,14 @@ export const STATE_KEY = {
         FILTERS: { V1: 'nimbusdesk.email-log.filters.v1' },
       },
     },
+
+    /* Chamados de TI (com.nimbusdesk.tickets no backend) */
+    TICKETS: {
+      TABLE: {
+        ROWS: { V1: 'tickets.table.rows' },
+        STATE: { V1: 'nimbusdesk.tickets.table.state.v1' },
+      },
+      FILTERS: { V1: 'nimbusdesk.tickets.filters.v1' },
+    },
   },
 };

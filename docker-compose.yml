@@ -1,0 +1,30 @@
+# Sobe o frontend do NimbusDesk sozinho (ng serve em container, live-reload). Uso normal é via
+# ../docker-compose.yml (na raiz do produto, "include:" deste arquivo + do
+# NimbusDeskServer/docker-compose.yml) - rode daqui direto só se já tiver o backend rodando de
+# outro jeito (ex.: `./gradlew bootRun` nativo) e só quiser o frontend em container.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      # NODE_AUTH_TOKEN: mesmo achado do backend (GITHUB_ACTOR/GITHUB_TOKEN), versão npm - o
+      # .npmrc do projeto (@williamsilva:registry) precisa dessa var pra autenticar no GitHub
+      # Packages durante `npm ci`. Sete num .env (não commitado).
+      args:
+        NODE_AUTH_TOKEN: ${NODE_AUTH_TOKEN}
+    ports:
+      # 4204 - próxima porta livre da convenção do workspace (cardsync 4201, nimbusflow 4202,
+      # nimbusnovax 4203).
+      - "127.0.0.1:4204:4204"
+    environment:
+      # Bind mount em Docker Desktop (Windows/Mac) não dispara eventos de fs nativos - sem
+      # polling o ng serve não percebe alterações no código.
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - .:/workspace
+      - web-node-modules:/workspace/node_modules
+      - web-angular-cache:/workspace/.angular
+
+volumes:
+  web-node-modules:
+  web-angular-cache:

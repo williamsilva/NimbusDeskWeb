@@ -2,6 +2,12 @@
 
 @import 'primeicons/primeicons.css';
 @import 'primeflex/primeflex.css';
+// Tema "snow" do Quill (toolbar acima do conteúdo) - o p-editor do PrimeNG só estiliza o
+// container/moldura (.p-editor-*), quem estiliza os controles da toolbar em si (dropdowns/ícones
+// de negrito/itálico/etc, ver com.nimbusdesk tickets - comentário/descrição) é o CSS do próprio
+// Quill (.ql-*) - sem isto a toolbar renderiza com <select> nativo do navegador e sem ícone
+// nenhum (achado em produção, ver memória/rich-text).
+@import 'quill/dist/quill.snow.css';
 
 /* Ajustes mínimos do app */
 html,

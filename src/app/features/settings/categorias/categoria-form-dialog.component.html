@@ -1,0 +1,77 @@
+<p-dialog
+  [modal]="true"
+  appendTo="body"
+  [closable]="false"
+  (onHide)="onHide()"
+  [draggable]="false"
+  [resizable]="false"
+  [visible]="visible()"
+  [style]="{ width: '480px', maxWidth: '95vw' }"
+  [header]="(isEditing() ? 'categorias.edit.title' : 'categorias.new.title') | translate"
+>
+  <form [formGroup]="form" class="cs-dialog-form">
+    <div class="grid formgrid gap-0">
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <input pInputText id="nome" class="w-full" formControlName="nome" />
+          <app-error-msg
+            [field]="'nome'"
+            [forId]="'nome'"
+            [control]="form.controls.nome"
+            [label]="'categorias.fields.nome' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-select
+            size="small"
+            class="w-full"
+            [filter]="true"
+            appendTo="body"
+            inputId="slaId"
+            optionLabel="label"
+            optionValue="value"
+            [options]="slaOptions()"
+            formControlName="slaId"
+          ></p-select>
+          <app-error-msg
+            [field]="'slaId'"
+            [forId]="'slaId'"
+            [control]="form.controls.slaId"
+            [label]="'categorias.fields.sla' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 p-2 flex align-items-center gap-2">
+        <p-checkbox binary="true" inputId="ativo" formControlName="ativo"></p-checkbox>
+        <label for="ativo">{{ 'categorias.fields.ativo' | translate }}</label>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      type="button"
+      (click)="close()"
+      icon="pi pi-times"
+      class="p-button-text p-button-sm"
+      [label]="'common.cancel' | translate"
+      [disabled]="saving()"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      (click)="save()"
+      icon="pi pi-save"
+      class="p-button-sm"
+      [loading]="saving()"
+      [label]="'common.save' | translate"
+      [disabled]="saving()"
+    ></button>
+  </ng-template>
+</p-dialog>

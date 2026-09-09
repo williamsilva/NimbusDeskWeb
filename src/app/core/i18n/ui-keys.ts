@@ -10,6 +10,7 @@
 export const UI_KEYS = {
   menu: {
     dashboard: 'menu.dashboard',
+    tickets: 'menu.tickets',
     security: {
       title: 'menu.security.title',
       users: 'menu.security.users',
@@ -20,6 +21,10 @@ export const UI_KEYS = {
       email: 'menu.settings.email',
       backup: 'menu.settings.backup',
       emailLog: 'menu.settings.emailLog',
+      categorias: 'menu.settings.categorias',
+      slas: 'menu.settings.slas',
+      setoresTi: 'menu.settings.setoresTi',
+      ticketAutomation: 'menu.settings.ticketAutomation',
     },
   },
   common: {

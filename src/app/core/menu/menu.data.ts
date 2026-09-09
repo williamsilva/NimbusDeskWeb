@@ -9,6 +9,14 @@ export const APP_MENU: AppMenuItem[] = [
     route: '/dashboard',
     exact: true,
   },
+  /* Chamados de TI — cor teal (sem gate de permissão: todo autenticado pode abrir/ver os
+   *  próprios chamados, ver PROJECT_SPEC.md) */
+  {
+    icon: 'pi pi-ticket text-teal-600',
+    labelKey: 'menu.tickets',
+    route: '/tickets',
+    exact: false,
+  },
   /* Security — cor vermelha */
   {
     icon: 'pi pi-shield text-red-600',
@@ -55,6 +63,34 @@ export const APP_MENU: AppMenuItem[] = [
         labelKey: 'menu.settings.emailLog',
         icon: 'pi pi-history text-indigo-400',
         permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETTINGS.EMAIL_LOG_VIEW],
+      },
+      {
+        exact: false,
+        route: '/settings/categorias',
+        labelKey: 'menu.settings.categorias',
+        icon: 'pi pi-tags text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.CATEGORIA.VIEW],
+      },
+      {
+        exact: false,
+        route: '/settings/slas',
+        labelKey: 'menu.settings.slas',
+        icon: 'pi pi-stopwatch text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SLA.VIEW],
+      },
+      {
+        exact: false,
+        route: '/settings/setores-ti',
+        labelKey: 'menu.settings.setoresTi',
+        icon: 'pi pi-sitemap text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETOR_TI.VIEW],
+      },
+      {
+        exact: false,
+        route: '/settings/ticket-automation',
+        labelKey: 'menu.settings.ticketAutomation',
+        icon: 'pi pi-bolt text-indigo-400',
+        permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.TICKET_AUTOMATION.VIEW],
       },
     ],
   },

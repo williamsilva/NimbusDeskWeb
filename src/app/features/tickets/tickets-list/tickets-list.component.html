@@ -1,0 +1,407 @@
+<app-page-header
+  [subtitle]="'tickets.subtitle' | translate"
+  [breadcrumb]="[
+    { label: ('menu.dashboard' | translate), url: '/dashboard' },
+    { label: ('breadcrumb.tickets' | translate) },
+  ]"
+  [compact]="false"
+>
+  <button
+    pButton
+    type="button"
+    (click)="refresh()"
+    icon="pi pi-refresh"
+    class="p-button-text p-button-sm"
+    [label]="'common.update' | translate"
+  ></button>
+
+  <button
+    pButton
+    type="button"
+    (click)="goNew()"
+    icon="pi pi-plus"
+    class="p-button-info p-button-sm"
+    [label]="'tickets.new.title' | translate"
+  ></button>
+</app-page-header>
+
+<app-tickets-create-dialog
+  [visible]="createVisible()"
+  (created)="onCreated()"
+  (visibleChange)="onCreateVisibleChange($event)"
+></app-tickets-create-dialog>
+
+<div class="flex justify-content-start mb-2">
+  <p-selectButton
+    [options]="scopeOptions()"
+    optionLabel="label"
+    optionValue="value"
+    [ngModel]="scope()"
+    (ngModelChange)="onScopeChange($event)"
+  >
+    <ng-template pTemplate="item" let-option>
+      <span>{{ option.label }}</span>
+      @if (option.count) {
+        <app-badge class="ml-2" tone="danger" [value]="option.count" [max]="99"></app-badge>
+      }
+    </ng-template>
+  </p-selectButton>
+</div>
+
+<cs-filters-panel
+  [collapsed]="true"
+  (clear)="clear()"
+  (search)="search()"
+  [actionsAlign]="'start'"
+  [activeCount]="activeFiltersCount()"
+  [title]="'common.filter' | translate"
+  [activeFilterGroups]="activeFilterGroups()"
+>
+  <div class="grid formgrid gap-0 align-items-end">
+    <div class="col-12 md:col-3 p-1">
+      <p-floatLabel variant="on" class="w-full">
+        <p-multiSelect
+          size="small"
+          class="w-full"
+          appendTo="body"
+          inputId="status"
+          [showClear]="true"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="status()"
+          [showToggleAll]="false"
+          [options]="statusOptions()"
+          (ngModelChange)="status.set($event?.length ? $event : null)"
+        ></p-multiSelect>
+        <label for="status">{{ 'tickets.fields.status' | translate }}</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="col-12 md:col-3 p-1">
+      <p-floatLabel variant="on" class="w-full">
+        <p-multiSelect
+          size="small"
+          class="w-full"
+          appendTo="body"
+          [showClear]="true"
+          inputId="prioridade"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="prioridade()"
+          [showToggleAll]="false"
+          [options]="priorityOptions()"
+          (ngModelChange)="prioridade.set($event?.length ? $event : null)"
+        ></p-multiSelect>
+        <label for="prioridade">{{ 'tickets.fields.prioridade' | translate }}</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="col-12 md:col-3 p-1">
+      <p-floatLabel variant="on" class="w-full">
+        <p-select
+          size="small"
+          class="w-full"
+          [filter]="true"
+          appendTo="body"
+          inputId="categoriaId"
+          optionLabel="label"
+          optionValue="value"
+          [showClear]="true"
+          [ngModel]="categoriaId()"
+          [options]="categoryOptions()"
+          (ngModelChange)="categoriaId.set($event)"
+        ></p-select>
+        <label for="categoriaId">{{ 'tickets.fields.categoria' | translate }}</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="col-12 md:col-3 p-1">
+      <p-floatLabel variant="on" class="w-full">
+        <p-select
+          size="small"
+          class="w-full"
+          [filter]="true"
+          appendTo="body"
+          inputId="setorId"
+          optionLabel="label"
+          optionValue="value"
+          [showClear]="true"
+          [ngModel]="setorId()"
+          [options]="setorOptions()"
+          (ngModelChange)="setorId.set($event)"
+        ></p-select>
+        <label for="setorId">{{ 'tickets.fields.setor' | translate }}</label>
+      </p-floatLabel>
+    </div>
+  </div>
+</cs-filters-panel>
+
+<div class="surface-card border-round px-3 pt-2 pb-3 mt-2">
+  <p-table
+    #dt
+    stripedRows
+    dataKey="id"
+    size="small"
+    [rows]="rows"
+    [lazy]="true"
+    showGridlines
+    [rowHover]="true"
+    [paginator]="true"
+    sortMode="multiple"
+    [value]="tickets()"
+    filterDisplay="menu"
+    stateStorage="local"
+    class="cs-admin-table"
+    [loading]="facade.loading()"
+    [stateKey]="tableStateKey()"
+    [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords()"
+    (onLazyLoad)="onLazyLoad($event)"
+    [paginatorDropdownAppendTo]="'body'"
+    (onPage)="onPageChange($event)"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    [tableStyle]="{ width: '100%', 'min-width': '82rem' }"
+    [currentPageReportTemplate]="'pagination.report' | translate"
+  >
+    <ng-template pTemplate="colgroup">
+      <colgroup>
+        <col style="width: 120px" />
+        <col style="width: auto" />
+        <col style="width: 150px" />
+        <col style="width: 150px" />
+        <col style="width: 110px" />
+        <col style="width: 170px" />
+        <col style="width: 150px" />
+        <col style="width: 150px" />
+        <col style="width: 90px" />
+        <col style="width: 130px" />
+        <col style="width: 90px" />
+      </colgroup>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="numero">
+          <div class="th-flex text-center">
+            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.numero' | translate">{{
+              'tickets.columns.numero' | translate
+            }}</span>
+            <span class="th-icons">
+              <p-sortIcon field="numero"></p-sortIcon>
+            </span>
+          </div>
+        </th>
+
+        <th pSortableColumn="titulo">
+          <div class="th-flex text-center">
+            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.titulo' | translate">{{
+              'tickets.columns.titulo' | translate
+            }}</span>
+            <span class="th-icons">
+              <p-sortIcon field="titulo"></p-sortIcon>
+              <p-columnFilter
+                type="text"
+                field="titulo"
+                display="menu"
+                class="ml-auto"
+                matchMode="contains"
+                [useGrouping]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+                styleClass="cs-colfilter"
+              ></p-columnFilter>
+            </span>
+          </div>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.categoria' | translate">{{
+            'tickets.columns.categoria' | translate
+          }}</span>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.setor' | translate">{{
+            'tickets.columns.setor' | translate
+          }}</span>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.prioridade' | translate">{{
+            'tickets.columns.prioridade' | translate
+          }}</span>
+        </th>
+
+        <th pSortableColumn="status">
+          <div class="th-flex text-center">
+            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.status' | translate">{{
+              'tickets.columns.status' | translate
+            }}</span>
+            <span class="th-icons">
+              <p-sortIcon field="status"></p-sortIcon>
+              <p-columnFilter
+                display="menu"
+                matchMode="in"
+                field="status"
+                [showOperator]="false"
+                [showAddButton]="false"
+                [showMatchModes]="false"
+                styleClass="cs-colfilter"
+              >
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-multiSelect
+                    class="w-full"
+                    appendTo="body"
+                    [ngModel]="value"
+                    [showClear]="true"
+                    optionLabel="label"
+                    optionValue="value"
+                    [options]="statusOptions()"
+                    (onChange)="filter($event.value)"
+                    [placeholder]="'common.all' | translate"
+                  ></p-multiSelect>
+                </ng-template>
+              </p-columnFilter>
+            </span>
+          </div>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.solicitante' | translate">{{
+            'tickets.columns.solicitante' | translate
+          }}</span>
+        </th>
+
+        <th pSortableColumn="dataAbertura">
+          <div class="th-flex text-center">
+            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.dataAbertura' | translate">{{
+              'tickets.columns.dataAbertura' | translate
+            }}</span>
+            <span class="th-icons">
+              <p-sortIcon field="dataAbertura"></p-sortIcon>
+            </span>
+          </div>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.sla' | translate">{{
+            'tickets.columns.sla' | translate
+          }}</span>
+        </th>
+
+        <th pSortableColumn="updatedAt">
+          <div class="th-flex text-center">
+            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.atualizacao' | translate">{{
+              'tickets.columns.atualizacao' | translate
+            }}</span>
+            <span class="th-icons">
+              <p-sortIcon field="updatedAt"></p-sortIcon>
+            </span>
+          </div>
+        </th>
+
+        <th class="text-center">
+          <span class="th-label" tooltipPosition="top" [pTooltip]="'common.actions' | translate">{{
+            'common.actions' | translate
+          }}</span>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row>
+      <tr class="cs-clickable-row" (click)="goDetail(row)">
+        <td class="mobile-card-title" [attr.data-label]="'tickets.columns.numero' | translate">
+          {{ row.numero }}
+        </td>
+        <td [attr.data-label]="'tickets.columns.titulo' | translate">
+          <span class="cs-table-cell-ellipsis" tooltipPosition="top" [pTooltip]="row.titulo">{{
+            row.titulo
+          }}</span>
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.categoria' | translate">
+          {{ row.categoriaNome ?? '-' }}
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.setor' | translate">
+          {{ row.setorNome ?? '-' }}
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.prioridade' | translate">
+          <app-status-badge
+            [tone]="priorityTone(row.prioridade)"
+            [label]="'tickets.priority.' + row.prioridade | translate"
+          ></app-status-badge>
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.status' | translate">
+          <app-status-badge
+            [tone]="tone(row.status)"
+            [label]="'tickets.status.' + row.status | translate"
+          ></app-status-badge>
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.solicitante' | translate">
+          <span
+            class="cs-table-cell-ellipsis"
+            tooltipPosition="top"
+            [pTooltip]="row.solicitanteNome ?? '-'"
+            >{{ row.solicitanteNome ?? '-' }}</span
+          >
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.dataAbertura' | translate">
+          {{ row.dataAbertura ? (row.dataAbertura | csDate: 'short') : '-' }}
+        </td>
+        <td class="text-center" [attr.data-label]="'tickets.columns.sla' | translate">
+          @if (isOverdue(row)) {
+            <app-status-badge [tone]="'danger'" [label]="'tickets.sla.overdue' | translate"></app-status-badge>
+          } @else {
+            <span class="opacity-50">-</span>
+          }
+        </td>
+        <td
+          class="text-center"
+          tooltipPosition="top"
+          [pTooltip]="row.updatedAt ? (row.updatedAt | csDate: 'short') : undefined"
+          [attr.data-label]="'tickets.columns.atualizacao' | translate"
+        >
+          {{ row.updatedAt ? (row.updatedAt | timeAgo) : '-' }}
+        </td>
+        <td class="text-center mobile-card-actions" [attr.data-label]="'common.actions' | translate">
+          <div class="table-actions">
+            @if (scope() === 'queue') {
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-plus"
+                (click)="$event.stopPropagation(); assignToMe(row)"
+                class="p-button-text p-button-sm"
+                [loading]="assigningToMeId() === row.id"
+                [pTooltip]="'tickets.action.assignToMe' | translate"
+                [attr.aria-label]="'tickets.action.assignToMe' | translate"
+                tooltipPosition="top"
+              ></button>
+            }
+            <button
+              pButton
+              type="button"
+              icon="pi pi-eye"
+              (click)="$event.stopPropagation(); goDetail(row)"
+              class="p-button-text p-button-sm"
+              [pTooltip]="'common.view' | translate"
+              [attr.aria-label]="'common.view' | translate"
+              tooltipPosition="top"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="11" class="text-center py-5 opacity-70">
+          {{
+            facade.loadedOnce()
+              ? ('tickets.empty.title' | translate)
+              : ('common.loading' | translate)
+          }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

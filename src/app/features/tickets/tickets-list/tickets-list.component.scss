@@ -1,0 +1,12 @@
+@use '../../../../assets/styles/mobile-card-table' as mct;
+
+// Mobile: tabela vira lista de cards - ver mobile-card-table.scss pro que isso faz e por quê.
+// mobile-card-title/mobile-card-actions marcados manualmente no <td> certo, no HTML desta tela.
+@include mct.mobile-card-table;
+
+// Linha inteira navega pro detalhe do chamado (ver goDetail no HTML) - só o cursor muda,
+// [rowHover] já cuida do destaque visual.
+:host ::ng-deep .cs-admin-table .p-datatable-tbody > tr.cs-clickable-row {
+  cursor: pointer;
+}
+

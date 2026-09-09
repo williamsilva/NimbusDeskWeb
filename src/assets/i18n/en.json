@@ -29,6 +29,29 @@
       },
       "emailLog": {
         "title": "Email Audit"
+      },
+      "categorias": {
+        "title": "Categories"
+      },
+      "slas": {
+        "title": "SLAs"
+      },
+      "setoresTi": {
+        "title": "IT Sectors"
+      },
+      "ticketAutomation": {
+        "title": "Ticket Automation"
+      }
+    },
+    "tickets": {
+      "list": {
+        "title": "Tickets"
+      },
+      "new": {
+        "title": "New ticket"
+      },
+      "detail": {
+        "title": "Ticket detail"
       }
     },
     "dashboard": {
@@ -58,6 +81,7 @@
     "me": "My account",
     "more": "More",
     "dashboard": "Dashboard",
+    "tickets": "Tickets",
     "security": {
       "title": "Security",
       "groups": "Groups",
@@ -69,7 +93,11 @@
       "title": "Settings",
       "email": "Email Settings",
       "backup": "Backup",
-      "emailLog": "Email Audit"
+      "emailLog": "Email Audit",
+      "categorias": "Categories",
+      "slas": "SLAs",
+      "setoresTi": "IT Sectors",
+      "ticketAutomation": "Ticket Automation"
     }
   },
   "sidebar": {
@@ -79,6 +107,7 @@
   "breadcrumb": {
     "groups": "Groups",
     "users": "Users",
+    "tickets": "Tickets",
     "dashboard": {
       "title": "Dashboard"
     }
@@ -449,6 +478,17 @@
     "logout": "Log out",
     "close": "Close",
     "clear": "Clear",
+    "search": {
+      "title": "Search"
+    },
+    "timeAgo": {
+      "justNow": "Just now",
+      "minutes": "{count, plural, one {# minute ago} other {# minutes ago}}",
+      "hours": "{count, plural, one {# hour ago} other {# hours ago}}",
+      "days": "{count, plural, one {# day ago} other {# days ago}}",
+      "months": "{count, plural, one {# month ago} other {# months ago}}",
+      "years": "{count, plural, one {# year ago} other {# years ago}}"
+    },
     "quantity": "Qty.",
     "status": "Status",
     "apply": "Apply",
@@ -558,6 +598,25 @@
       "saveError": "Could not save email settings."
     }
   },
+  "ticketAutomation": {
+    "settings": {
+      "subtitle": "Periodicity of the automatic ticket jobs (email alerts and auto-close).",
+      "unassignedAlertTitle": "Unassigned ticket alert",
+      "pendingResponseAlertTitle": "Pending response alert",
+      "autoCloseTitle": "Auto-close resolved tickets",
+      "saved": "Automation settings saved successfully.",
+      "saveError": "Could not save automation settings."
+    },
+    "fields": {
+      "periodicidadeDias": "Send periodicity (days)",
+      "unassignedAlertPeriodicidadeDiasHint": "How often (in days) to resend, to IT staff, the email listing OPEN tickets with no assigned owner.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "How often (in days) to resend the email telling the requester (and shared users) or the assignee there are ticket(s) waiting on their reply.",
+      "autoClosePeriodicidadeDias": "Run periodicity (days)",
+      "autoClosePeriodicidadeDiasHint": "How often (in days) the auto-close job runs.",
+      "autoCloseCarenciaDias": "Grace period before closing (days)",
+      "autoCloseCarenciaDiasHint": "How many days a ticket must stay Resolved before it is automatically closed."
+    }
+  },
   "emailLog": {
     "subtitle": "Record of every email sent by the system - recipients, subject, status and body.",
     "columns": {
@@ -614,7 +673,246 @@
   },
   "dashboard": {
     "subtitle": "Home",
-    "empty": "Dashboard under construction",
-    "emptyHint": "No business module configured yet. This space will show NimbusDesk's metrics once data is available."
+    "welcome": "Welcome to NimbusDesk",
+    "welcomeHint": "Open a ticket or track your ongoing tickets.",
+    "myTicketsLink": "My tickets",
+    "kpi": {
+      "total": "Total tickets",
+      "slaOverdue": "SLA overdue",
+      "categories": "Categories with tickets"
+    },
+    "charts": {
+      "byStatus": {
+        "title": "Tickets by status"
+      },
+      "byCategory": {
+        "title": "Tickets by category"
+      }
+    },
+    "slaOverdueList": {
+      "title": "Tickets with SLA overdue",
+      "empty": "No tickets with SLA overdue."
+    }
+  },
+  "tickets": {
+    "subtitle": "Open and track IT tickets",
+    "new": {
+      "title": "New ticket",
+      "subtitle": "Ticket creation"
+    },
+    "empty": {
+      "title": "No tickets found"
+    },
+    "detail": {
+      "notFound": "Ticket not found."
+    },
+    "sla": {
+      "overdue": "SLA overdue"
+    },
+    "scope": {
+      "mine": "My tickets",
+      "waiting": "Waiting on me",
+      "shared": "Shared with me",
+      "queue": "Service queue",
+      "all": "All"
+    },
+    "fields": {
+      "titulo": "Title",
+      "descricao": "Description",
+      "categoria": "Category",
+      "setor": "Sector",
+      "equipamento": "Equipment",
+      "attachments": "Attachments",
+      "status": "Status",
+      "prioridade": "Priority",
+      "solicitante": "Requester",
+      "responsavel": "Assignee",
+      "canalOrigem": "Origin channel",
+      "dataAbertura": "Opened at",
+      "dataLimiteSla": "SLA deadline",
+      "dataResolucao": "Resolved at",
+      "dataFechamento": "Closed at"
+    },
+    "columns": {
+      "numero": "Number",
+      "titulo": "Title",
+      "categoria": "Category",
+      "setor": "Sector",
+      "prioridade": "Priority",
+      "status": "Status",
+      "solicitante": "Requester",
+      "dataAbertura": "Opened at",
+      "sla": "SLA",
+      "atualizacao": "Updated"
+    },
+    "status": {
+      "ABERTO": "Open",
+      "EM_ANDAMENTO": "In progress",
+      "AGUARDANDO_SOLICITANTE": "Waiting for requester",
+      "AGUARDANDO_RESPOSTA": "Awaiting response",
+      "RESOLVIDO": "Resolved",
+      "FECHADO": "Closed",
+      "CANCELADO": "Cancelled"
+    },
+    "priority": {
+      "URGENTE": "Urgent",
+      "ALTA": "High",
+      "MEDIA": "Medium",
+      "BAIXA": "Low"
+    },
+    "canal": {
+      "PORTAL": "Portal",
+      "EMAIL": "E-mail",
+      "TELEFONE": "Phone"
+    },
+    "form": {
+      "invalid": "Check the required fields of the form.",
+      "created": "Ticket created successfully.",
+      "updated": "Ticket updated successfully.",
+      "saveError": "Could not save the ticket."
+    },
+    "actions": {
+      "title": "Actions",
+      "changeStatus": "Change status",
+      "selectStatus": "Select the new status",
+      "noTransitions": "No status transition available.",
+      "assign": "Assign responsible",
+      "selectResponsavel": "Select the responsible"
+    },
+    "action": {
+      "statusChanged": "Status updated successfully.",
+      "statusChangeError": "Could not update the status.",
+      "assigned": "Responsible assigned successfully.",
+      "assignError": "Could not assign the responsible.",
+      "assignToMe": "Assign to me"
+    },
+    "comments": {
+      "title": "Comments",
+      "empty": "No comments yet.",
+      "placeholder": "Write a comment...",
+      "send": "Send",
+      "internal": "Internal comment",
+      "internalTag": "Internal",
+      "showMore": "Show more",
+      "showLess": "Show less",
+      "closedTicket": "This ticket is closed and no longer accepts interactions."
+    },
+    "comment": {
+      "saveError": "Could not send the comment."
+    },
+    "attachments": {
+      "selected": "file(s) selected"
+    },
+    "participants": {
+      "title": "Shared with",
+      "empty": "No one has been added yet.",
+      "placeholder": "Select who should follow this ticket",
+      "saved": "Participants updated.",
+      "saveError": "Could not update the participants."
+    },
+    "attachment": {
+      "saveError": "Could not upload the attachment.",
+      "urlError": "Could not get the attachment link."
+    },
+    "history": {
+      "title": "Status history",
+      "empty": "No status change recorded."
+    },
+    "details": {
+      "title": "Details"
+    }
+  },
+  "categorias": {
+    "subtitle": "Manage ticket categories",
+    "new": {
+      "title": "New category"
+    },
+    "edit": {
+      "title": "Edit category"
+    },
+    "empty": {
+      "title": "No category found"
+    },
+    "action": {
+      "noPermission": "You do not have permission to edit categories."
+    },
+    "fields": {
+      "nome": "Name",
+      "sla": "SLA",
+      "ativo": "Active"
+    },
+    "columns": {
+      "nome": "Name",
+      "sla": "SLA",
+      "ativo": "Active"
+    },
+    "form": {
+      "invalid": "Check the required fields of the form.",
+      "created": "Category created successfully.",
+      "updated": "Category updated successfully.",
+      "saveError": "Could not save the category."
+    }
+  },
+  "slas": {
+    "subtitle": "Manage service SLAs",
+    "new": {
+      "title": "New SLA"
+    },
+    "edit": {
+      "title": "Edit SLA"
+    },
+    "empty": {
+      "title": "No SLA found"
+    },
+    "action": {
+      "noPermission": "You do not have permission to edit SLAs."
+    },
+    "fields": {
+      "nome": "Name",
+      "tempoResposta": "Response time (min)",
+      "tempoResolucao": "Resolution time (min)"
+    },
+    "columns": {
+      "nome": "Name",
+      "tempoResposta": "Response time",
+      "tempoResolucao": "Resolution time"
+    },
+    "form": {
+      "invalid": "Check the required fields of the form.",
+      "created": "SLA created successfully.",
+      "updated": "SLA updated successfully.",
+      "saveError": "Could not save the SLA."
+    }
+  },
+  "setoresTi": {
+    "subtitle": "Manage IT sectors",
+    "new": {
+      "title": "New sector"
+    },
+    "edit": {
+      "title": "Edit sector"
+    },
+    "empty": {
+      "title": "No sector found"
+    },
+    "action": {
+      "noPermission": "You do not have permission to edit sectors."
+    },
+    "fields": {
+      "nome": "Name",
+      "users": "Users",
+      "ativo": "Active"
+    },
+    "columns": {
+      "nome": "Name",
+      "users": "Users",
+      "ativo": "Active"
+    },
+    "form": {
+      "invalid": "Check the required fields of the form.",
+      "created": "Sector created successfully.",
+      "updated": "Sector updated successfully.",
+      "saveError": "Could not save the sector."
+    }
   }
 }

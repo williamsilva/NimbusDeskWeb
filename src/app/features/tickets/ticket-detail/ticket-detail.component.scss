@@ -1,0 +1,92 @@
+// Lista rótulo/valor dos detalhes do chamado (categoria/setor/solicitante/etc.) - grid de 2
+// colunas (rótulo estreito + valor), mesmo espírito de cs-summary/cs-detail usados no
+// group-detail, mas bem mais simples (só texto, sem cards/ícones).
+.cs-detail-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 0.75rem;
+  margin: 0;
+}
+
+.cs-detail-list dt {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.cs-detail-list dd {
+  margin: 0;
+  text-align: right;
+  word-break: break-word;
+}
+
+// Bolha de comentário estilo chat - largura limitada pra sobrar espaço do lado oposto (ver
+// ticket-detail.component.html: a linha externa usa justify-content-end pro grupo "ti", jogando a
+// bolha pra direita; solicitante/participante ficam à esquerda, que é o padrão do flex).
+.cs-comment-bubble {
+  max-width: 82%;
+}
+
+// Cor por grupo de quem comentou (ver TicketDetailComponent#commentGroup) - solicitante e
+// participante (compartilhado/em cópia) ficam do lado esquerdo com cores distintas entre si;
+// T.I. (responsável ou qualquer outro membro do T.I. que comentou) do lado direito.
+.cs-comment-solicitante {
+  background-color: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.cs-comment-participante {
+  background-color: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.cs-comment-ti {
+  background-color: rgba(67, 56, 202, 0.1);
+  border: 1px solid rgba(67, 56, 202, 0.3);
+}
+
+:host-context(.dark) .cs-comment-solicitante {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.38);
+}
+
+:host-context(.dark) .cs-comment-participante {
+  background-color: rgba(139, 92, 246, 0.22);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+:host-context(.dark) .cs-comment-ti {
+  background-color: rgba(99, 102, 241, 0.22);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+// Comentário interno (só visível pra quem tem CHAMADO_MANAGE) - some com a cor de grupo (interno
+// só existe pro lado "ti") e vira um acento âmbar tracejado, pra diferenciar do comentário público
+// sem perder a cor do grupo (ver ticket-detail.component.html).
+.cs-comment-internal {
+  border-style: dashed;
+  border-color: rgba(245, 158, 11, 0.6);
+}
+
+:host-context(.dark) .cs-comment-internal {
+  border-color: rgba(245, 158, 11, 0.55);
+}
+
+// Renderização do HTML vindo do p-editor (ver ticket-detail.component.html - [innerHTML], nunca
+// interpolação) - Quill sempre embrulha em <p>, com margem própria que sobra estranho dentro da
+// bolha apertada do chat; zera a margem do primeiro/último parágrafo, mantém entre parágrafos do
+// meio. Imagem nunca deve estourar a largura da bolha (ver .cs-comment-bubble).
+.cs-rich-text {
+  p {
+    margin: 0 0 0.5rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+}

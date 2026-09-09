@@ -1,0 +1,90 @@
+<p-dialog
+  [modal]="true"
+  appendTo="body"
+  [closable]="false"
+  (onHide)="onHide()"
+  [draggable]="false"
+  [resizable]="false"
+  [visible]="visible()"
+  [style]="{ width: '480px', maxWidth: '95vw' }"
+  [header]="(isEditing() ? 'slas.edit.title' : 'slas.new.title') | translate"
+>
+  <form [formGroup]="form" class="cs-dialog-form">
+    <div class="grid formgrid gap-0">
+      <div class="col-12 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <input pInputText id="nome" class="w-full" formControlName="nome" />
+          <app-error-msg
+            [field]="'nome'"
+            [forId]="'nome'"
+            [control]="form.controls.nome"
+            [label]="'slas.fields.nome' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 md:col-6 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputNumber
+            size="small"
+            class="w-full"
+            [min]="1"
+            [showButtons]="false"
+            inputId="tempoRespostaMin"
+            inputStyleClass="w-full"
+            formControlName="tempoRespostaMin"
+          ></p-inputNumber>
+          <app-error-msg
+            [field]="'tempoRespostaMin'"
+            [forId]="'tempoRespostaMin'"
+            [control]="form.controls.tempoRespostaMin"
+            [label]="'slas.fields.tempoResposta' | translate"
+          />
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 md:col-6 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputNumber
+            size="small"
+            class="w-full"
+            [min]="1"
+            [showButtons]="false"
+            inputId="tempoResolucaoMin"
+            inputStyleClass="w-full"
+            formControlName="tempoResolucaoMin"
+          ></p-inputNumber>
+          <app-error-msg
+            [field]="'tempoResolucaoMin'"
+            [forId]="'tempoResolucaoMin'"
+            [control]="form.controls.tempoResolucaoMin"
+            [label]="'slas.fields.tempoResolucao' | translate"
+          />
+        </p-floatLabel>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      type="button"
+      (click)="close()"
+      icon="pi pi-times"
+      class="p-button-text p-button-sm"
+      [label]="'common.cancel' | translate"
+      [disabled]="saving()"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      (click)="save()"
+      icon="pi pi-save"
+      class="p-button-sm"
+      [loading]="saving()"
+      [label]="'common.save' | translate"
+      [disabled]="saving()"
+    ></button>
+  </ng-template>
+</p-dialog>

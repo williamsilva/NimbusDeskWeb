@@ -29,6 +29,29 @@
       },
       "emailLog": {
         "title": "Auditoria de E-mail"
+      },
+      "categorias": {
+        "title": "Categorias"
+      },
+      "slas": {
+        "title": "SLAs"
+      },
+      "setoresTi": {
+        "title": "Setores de TI"
+      },
+      "ticketAutomation": {
+        "title": "Automação de chamados"
+      }
+    },
+    "tickets": {
+      "list": {
+        "title": "Chamados"
+      },
+      "new": {
+        "title": "Novo chamado"
+      },
+      "detail": {
+        "title": "Detalhe do chamado"
       }
     },
     "dashboard": {
@@ -58,6 +81,7 @@
     "me": "Minha conta",
     "more": "Mais",
     "dashboard": "Dashboard",
+    "tickets": "Chamados",
     "security": {
       "title": "Segurança",
       "groups": "Grupos",
@@ -69,7 +93,11 @@
       "title": "Configurações",
       "email": "Configuração de E-mail",
       "backup": "Backup",
-      "emailLog": "Auditoria de E-mail"
+      "emailLog": "Auditoria de E-mail",
+      "categorias": "Categorias",
+      "slas": "SLAs",
+      "setoresTi": "Setores de TI",
+      "ticketAutomation": "Automação de chamados"
     }
   },
   "sidebar": {
@@ -79,6 +107,7 @@
   "breadcrumb": {
     "groups": "Grupos",
     "users": "Usuários",
+    "tickets": "Chamados",
     "dashboard": {
       "title": "Dashboard"
     }
@@ -449,6 +478,17 @@
     "logout": "Sair",
     "close": "Fechar",
     "clear": "Limpar",
+    "search": {
+      "title": "Buscar"
+    },
+    "timeAgo": {
+      "justNow": "Agora mesmo",
+      "minutes": "{count, plural, one {Um minuto atrás} other {# minutos atrás}}",
+      "hours": "{count, plural, one {Uma hora atrás} other {# horas atrás}}",
+      "days": "{count, plural, one {Um dia atrás} other {# dias atrás}}",
+      "months": "{count, plural, one {Um mês atrás} other {# meses atrás}}",
+      "years": "{count, plural, one {Um ano atrás} other {# anos atrás}}"
+    },
     "quantity": "Qtd.",
     "status": "Status",
     "apply": "Aplicar",
@@ -558,6 +598,25 @@
       "saveError": "Não foi possível salvar as configurações de e-mail."
     }
   },
+  "ticketAutomation": {
+    "settings": {
+      "subtitle": "Periodicidade dos jobs automáticos de chamado (alertas por e-mail e auto-fechamento).",
+      "unassignedAlertTitle": "Alerta de chamado sem responsável",
+      "pendingResponseAlertTitle": "Alerta de pendência de resposta",
+      "autoCloseTitle": "Auto-fechamento de chamados resolvidos",
+      "saved": "Configurações de automação salvas com sucesso.",
+      "saveError": "Não foi possível salvar as configurações de automação."
+    },
+    "fields": {
+      "periodicidadeDias": "Periodicidade do envio (dias)",
+      "unassignedAlertPeriodicidadeDiasHint": "A cada quantos dias reenviar, pro T.I., o e-mail listando os chamados ABERTO sem responsável atribuído.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "A cada quantos dias reenviar o e-mail avisando o solicitante (e compartilhados) ou o responsável que há chamado(s) aguardando a resposta dele.",
+      "autoClosePeriodicidadeDias": "Periodicidade da execução (dias)",
+      "autoClosePeriodicidadeDiasHint": "A cada quantos dias o job de auto-fechamento roda.",
+      "autoCloseCarenciaDias": "Carência antes de fechar (dias)",
+      "autoCloseCarenciaDiasHint": "Quantos dias um chamado precisa estar parado em Resolvido antes de ser fechado automaticamente."
+    }
+  },
   "emailLog": {
     "subtitle": "Registro de todos os e-mails enviados pelo sistema - destinatários, assunto, status e corpo.",
     "columns": {
@@ -614,7 +673,246 @@
   },
   "dashboard": {
     "subtitle": "Painel inicial",
-    "empty": "Dashboard em construção",
-    "emptyHint": "Nenhum módulo de negócio configurado ainda. Este espaço vai mostrar os indicadores do NimbusDesk assim que houver dados."
+    "welcome": "Bem-vindo ao NimbusDesk",
+    "welcomeHint": "Abra um chamado ou acompanhe os seus chamados em andamento.",
+    "myTicketsLink": "Meus chamados",
+    "kpi": {
+      "total": "Total de chamados",
+      "slaOverdue": "SLA estourado",
+      "categories": "Categorias com chamados"
+    },
+    "charts": {
+      "byStatus": {
+        "title": "Chamados por status"
+      },
+      "byCategory": {
+        "title": "Chamados por categoria"
+      }
+    },
+    "slaOverdueList": {
+      "title": "Chamados com SLA estourado",
+      "empty": "Nenhum chamado com SLA estourado."
+    }
+  },
+  "tickets": {
+    "subtitle": "Abra e acompanhe chamados de TI",
+    "new": {
+      "title": "Novo chamado",
+      "subtitle": "Abertura de chamado"
+    },
+    "empty": {
+      "title": "Nenhum chamado encontrado"
+    },
+    "detail": {
+      "notFound": "Chamado não encontrado."
+    },
+    "sla": {
+      "overdue": "SLA estourado"
+    },
+    "scope": {
+      "mine": "Meus chamados",
+      "waiting": "Aguardando minha ação",
+      "shared": "Compartilhados comigo",
+      "queue": "Fila de atendimento",
+      "all": "Todos"
+    },
+    "fields": {
+      "titulo": "Título",
+      "descricao": "Descrição",
+      "categoria": "Categoria",
+      "setor": "Setor",
+      "equipamento": "Equipamento",
+      "attachments": "Anexos",
+      "status": "Status",
+      "prioridade": "Prioridade",
+      "solicitante": "Solicitante",
+      "responsavel": "Responsável",
+      "canalOrigem": "Canal de origem",
+      "dataAbertura": "Aberto em",
+      "dataLimiteSla": "Limite do SLA",
+      "dataResolucao": "Resolvido em",
+      "dataFechamento": "Fechado em"
+    },
+    "columns": {
+      "numero": "Número",
+      "titulo": "Título",
+      "categoria": "Categoria",
+      "setor": "Setor",
+      "prioridade": "Prioridade",
+      "status": "Status",
+      "solicitante": "Solicitante",
+      "dataAbertura": "Aberto em",
+      "sla": "SLA",
+      "atualizacao": "Atualização"
+    },
+    "status": {
+      "ABERTO": "Aberto",
+      "EM_ANDAMENTO": "Em andamento",
+      "AGUARDANDO_SOLICITANTE": "Aguardando solicitante",
+      "AGUARDANDO_RESPOSTA": "Aguardando resposta",
+      "RESOLVIDO": "Resolvido",
+      "FECHADO": "Fechado",
+      "CANCELADO": "Cancelado"
+    },
+    "priority": {
+      "URGENTE": "Urgente",
+      "ALTA": "Alta",
+      "MEDIA": "Média",
+      "BAIXA": "Baixa"
+    },
+    "canal": {
+      "PORTAL": "Portal",
+      "EMAIL": "E-mail",
+      "TELEFONE": "Telefone"
+    },
+    "form": {
+      "invalid": "Verifique os campos obrigatórios do formulário.",
+      "created": "Chamado criado com sucesso.",
+      "updated": "Chamado atualizado com sucesso.",
+      "saveError": "Não foi possível salvar o chamado."
+    },
+    "actions": {
+      "title": "Ações",
+      "changeStatus": "Mudar status",
+      "selectStatus": "Selecione o novo status",
+      "noTransitions": "Nenhuma transição de status disponível.",
+      "assign": "Atribuir responsável",
+      "selectResponsavel": "Selecione o responsável"
+    },
+    "action": {
+      "statusChanged": "Status atualizado com sucesso.",
+      "statusChangeError": "Não foi possível atualizar o status.",
+      "assigned": "Responsável atribuído com sucesso.",
+      "assignError": "Não foi possível atribuir o responsável.",
+      "assignToMe": "Atribuir a mim"
+    },
+    "comments": {
+      "title": "Comentários",
+      "empty": "Nenhum comentário ainda.",
+      "placeholder": "Escreva um comentário...",
+      "send": "Enviar",
+      "internal": "Comentário interno",
+      "internalTag": "Interno",
+      "showMore": "Ver mais",
+      "showLess": "Ver menos",
+      "closedTicket": "Este chamado está encerrado e não aceita mais interações."
+    },
+    "comment": {
+      "saveError": "Não foi possível enviar o comentário."
+    },
+    "attachments": {
+      "selected": "arquivo(s) selecionado(s)"
+    },
+    "participants": {
+      "title": "Compartilhado com",
+      "empty": "Ninguém foi adicionado ainda.",
+      "placeholder": "Selecione quem deve acompanhar este chamado",
+      "saved": "Participantes atualizados.",
+      "saveError": "Não foi possível atualizar os participantes."
+    },
+    "attachment": {
+      "saveError": "Não foi possível enviar o anexo.",
+      "urlError": "Não foi possível obter o link do anexo."
+    },
+    "history": {
+      "title": "Histórico de status",
+      "empty": "Nenhuma alteração de status registrada."
+    },
+    "details": {
+      "title": "Detalhes"
+    }
+  },
+  "categorias": {
+    "subtitle": "Gerencie as categorias de chamados",
+    "new": {
+      "title": "Nova categoria"
+    },
+    "edit": {
+      "title": "Editar categoria"
+    },
+    "empty": {
+      "title": "Nenhuma categoria encontrada"
+    },
+    "action": {
+      "noPermission": "Você não tem permissão para editar categorias."
+    },
+    "fields": {
+      "nome": "Nome",
+      "sla": "SLA",
+      "ativo": "Ativo"
+    },
+    "columns": {
+      "nome": "Nome",
+      "sla": "SLA",
+      "ativo": "Ativo"
+    },
+    "form": {
+      "invalid": "Verifique os campos obrigatórios do formulário.",
+      "created": "Categoria criada com sucesso.",
+      "updated": "Categoria atualizada com sucesso.",
+      "saveError": "Não foi possível salvar a categoria."
+    }
+  },
+  "slas": {
+    "subtitle": "Gerencie os SLAs de atendimento",
+    "new": {
+      "title": "Novo SLA"
+    },
+    "edit": {
+      "title": "Editar SLA"
+    },
+    "empty": {
+      "title": "Nenhum SLA encontrado"
+    },
+    "action": {
+      "noPermission": "Você não tem permissão para editar SLAs."
+    },
+    "fields": {
+      "nome": "Nome",
+      "tempoResposta": "Tempo de resposta (min)",
+      "tempoResolucao": "Tempo de resolução (min)"
+    },
+    "columns": {
+      "nome": "Nome",
+      "tempoResposta": "Tempo de resposta",
+      "tempoResolucao": "Tempo de resolução"
+    },
+    "form": {
+      "invalid": "Verifique os campos obrigatórios do formulário.",
+      "created": "SLA criado com sucesso.",
+      "updated": "SLA atualizado com sucesso.",
+      "saveError": "Não foi possível salvar o SLA."
+    }
+  },
+  "setoresTi": {
+    "subtitle": "Gerencie os setores de TI",
+    "new": {
+      "title": "Novo setor"
+    },
+    "edit": {
+      "title": "Editar setor"
+    },
+    "empty": {
+      "title": "Nenhum setor encontrado"
+    },
+    "action": {
+      "noPermission": "Você não tem permissão para editar setores."
+    },
+    "fields": {
+      "nome": "Nome",
+      "users": "Usuários",
+      "ativo": "Ativo"
+    },
+    "columns": {
+      "nome": "Nome",
+      "users": "Usuários",
+      "ativo": "Ativo"
+    },
+    "form": {
+      "invalid": "Verifique os campos obrigatórios do formulário.",
+      "created": "Setor criado com sucesso.",
+      "updated": "Setor atualizado com sucesso.",
+      "saveError": "Não foi possível salvar o setor."
+    }
   }
 }

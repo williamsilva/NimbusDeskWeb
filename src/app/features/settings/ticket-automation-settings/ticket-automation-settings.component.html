@@ -1,0 +1,134 @@
+<app-page-header
+  [subtitle]="'ticketAutomation.settings.subtitle' | translate"
+  [breadcrumb]="[
+    { label: ('menu.settings.title' | translate), url: '/settings' },
+    { label: ('routes.settings.ticketAutomation.title' | translate) },
+  ]"
+></app-page-header>
+
+<p-card class="mt-2 block">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="flex align-items-center gap-2 mb-2">
+      <span class="text-base font-semibold">{{ 'ticketAutomation.settings.unassignedAlertTitle' | translate }}</span>
+    </div>
+    <div class="grid formgrid gap-0">
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputnumber
+            [min]="1"
+            [max]="365"
+            class="w-full"
+            [useGrouping]="false"
+            inputId="unassignedAlertPeriodicidadeDias"
+            inputStyleClass="w-full p-inputtext-sm"
+            formControlName="unassignedAlertPeriodicidadeDias"
+          ></p-inputnumber>
+          <label for="unassignedAlertPeriodicidadeDias">
+            {{ 'ticketAutomation.fields.periodicidadeDias' | translate }}
+            <i
+              tooltipPosition="top"
+              style="pointer-events: auto"
+              [pTooltip]="'ticketAutomation.fields.unassignedAlertPeriodicidadeDiasHint' | translate"
+              class="pi pi-info-circle text-xs ml-1 text-color-secondary cursor-pointer"
+            ></i>
+          </label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="flex align-items-center gap-2 mb-2">
+      <span class="text-base font-semibold">{{ 'ticketAutomation.settings.pendingResponseAlertTitle' | translate }}</span>
+    </div>
+    <div class="grid formgrid gap-0">
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputnumber
+            [min]="1"
+            [max]="365"
+            class="w-full"
+            [useGrouping]="false"
+            inputId="pendingResponseAlertPeriodicidadeDias"
+            inputStyleClass="w-full p-inputtext-sm"
+            formControlName="pendingResponseAlertPeriodicidadeDias"
+          ></p-inputnumber>
+          <label for="pendingResponseAlertPeriodicidadeDias">
+            {{ 'ticketAutomation.fields.periodicidadeDias' | translate }}
+            <i
+              tooltipPosition="top"
+              style="pointer-events: auto"
+              [pTooltip]="'ticketAutomation.fields.pendingResponseAlertPeriodicidadeDiasHint' | translate"
+              class="pi pi-info-circle text-xs ml-1 text-color-secondary cursor-pointer"
+            ></i>
+          </label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="flex align-items-center gap-2 mb-2">
+      <span class="text-base font-semibold">{{ 'ticketAutomation.settings.autoCloseTitle' | translate }}</span>
+    </div>
+    <div class="grid formgrid gap-0">
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputnumber
+            [min]="1"
+            [max]="365"
+            class="w-full"
+            [useGrouping]="false"
+            inputId="autoClosePeriodicidadeDias"
+            inputStyleClass="w-full p-inputtext-sm"
+            formControlName="autoClosePeriodicidadeDias"
+          ></p-inputnumber>
+          <label for="autoClosePeriodicidadeDias">
+            {{ 'ticketAutomation.fields.autoClosePeriodicidadeDias' | translate }}
+            <i
+              tooltipPosition="top"
+              style="pointer-events: auto"
+              [pTooltip]="'ticketAutomation.fields.autoClosePeriodicidadeDiasHint' | translate"
+              class="pi pi-info-circle text-xs ml-1 text-color-secondary cursor-pointer"
+            ></i>
+          </label>
+        </p-floatLabel>
+      </div>
+
+      <div class="col-12 md:col-4 p-2">
+        <p-floatLabel variant="on" class="w-full">
+          <p-inputnumber
+            [min]="1"
+            [max]="365"
+            class="w-full"
+            [useGrouping]="false"
+            inputId="autoCloseCarenciaDias"
+            inputStyleClass="w-full p-inputtext-sm"
+            formControlName="autoCloseCarenciaDias"
+          ></p-inputnumber>
+          <label for="autoCloseCarenciaDias">
+            {{ 'ticketAutomation.fields.autoCloseCarenciaDias' | translate }}
+            <i
+              tooltipPosition="top"
+              style="pointer-events: auto"
+              [pTooltip]="'ticketAutomation.fields.autoCloseCarenciaDiasHint' | translate"
+              class="pi pi-info-circle text-xs ml-1 text-color-secondary cursor-pointer"
+            ></i>
+          </label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    @if (canEdit()) {
+      <div class="mt-4 px-2">
+        <p-button
+          type="submit"
+          icon="pi pi-save"
+          [loading]="saving()"
+          [label]="'common.save' | translate"
+          [disabled]="loading() || form.invalid"
+        ></p-button>
+      </div>
+    }
+  </form>
+</p-card>

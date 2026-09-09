@@ -1,0 +1,525 @@
+<app-page-header
+  [subtitle]="ticket()?.numero ?? ''"
+  [breadcrumb]="[
+    { label: ('menu.dashboard' | translate), url: '/dashboard' },
+    { label: ('breadcrumb.tickets' | translate), url: '/tickets' },
+    { label: ticket()?.numero ?? '' },
+  ]"
+  [compact]="false"
+>
+  <button
+    pButton
+    type="button"
+    (click)="goBack()"
+    icon="pi pi-arrow-left"
+    class="p-button-text p-button-sm"
+    [label]="'common.back' | translate"
+  ></button>
+
+  @if (canEdit() && !editMode()) {
+    <button
+      pButton
+      type="button"
+      (click)="openEdit()"
+      icon="pi pi-pencil"
+      class="p-button-sm"
+      [label]="'common.edit' | translate"
+    ></button>
+  }
+</app-page-header>
+
+@if (ticketLoading() && !ticket()) {
+  <div class="flex justify-content-center py-6">
+    <p-progressSpinner strokeWidth="4" ariaLabel="loading"></p-progressSpinner>
+  </div>
+} @else if (ticket(); as t) {
+  <div class="grid formgrid gap-0">
+    <div class="col-12 lg:col-8 p-2">
+      <div class="surface-card border-round p-3 mb-2">
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+          <div class="flex align-items-center gap-2 flex-wrap">
+            <span class="text-xl font-bold">{{ t.numero }}</span>
+            <span class="text-lg font-semibold">{{ t.titulo }}</span>
+            <app-status-badge [tone]="tone(t.status)" [label]="'tickets.status.' + t.status | translate"></app-status-badge>
+            <app-status-badge
+              [tone]="priorityTone(t.prioridade)"
+              [label]="'tickets.priority.' + t.prioridade | translate"
+            ></app-status-badge>
+            @if (isOverdue()) {
+              <app-status-badge [tone]="'danger'" [label]="'tickets.sla.overdue' | translate"></app-status-badge>
+            }
+          </div>
+        </div>
+
+        @if (editMode()) {
+          <form [formGroup]="editForm" class="cs-dialog-form mt-3">
+            <div class="grid formgrid gap-0">
+              <div class="col-12 p-2">
+                <p-floatLabel variant="on" class="w-full">
+                  <input pInputText id="edit-titulo" style="width: 100%" formControlName="titulo" />
+                  <app-error-msg
+                    [field]="'titulo'"
+                    [forId]="'edit-titulo'"
+                    [control]="editForm.controls.titulo"
+                    [label]="'tickets.fields.titulo' | translate"
+                  />
+                </p-floatLabel>
+              </div>
+              <div class="col-12 p-2">
+                <app-error-msg
+                  [field]="'descricao'"
+                  [forId]="'edit-descricao'"
+                  [control]="editForm.controls.descricao"
+                  [label]="'tickets.fields.descricao' | translate"
+                />
+                <app-rich-text-editor
+                  formControlName="descricao"
+                  class="block mt-1"
+                  [height]="'220px'"
+                ></app-rich-text-editor>
+              </div>
+              <div class="col-12 md:col-4 p-2">
+                <p-floatLabel variant="on" class="w-full">
+                  <p-select
+                    size="small"
+                    class="w-full"
+                    [filter]="true"
+                    appendTo="body"
+                    inputId="edit-categoriaId"
+                    optionLabel="label"
+                    optionValue="value"
+                    [options]="categoryOptions()"
+                    formControlName="categoriaId"
+                  ></p-select>
+                  <label for="edit-categoriaId">{{ 'tickets.fields.categoria' | translate }}</label>
+                </p-floatLabel>
+              </div>
+              <div class="col-12 md:col-4 p-2">
+                <p-floatLabel variant="on" class="w-full">
+                  <p-select
+                    size="small"
+                    class="w-full"
+                    [filter]="true"
+                    appendTo="body"
+                    [showClear]="true"
+                    inputId="edit-setorId"
+                    optionLabel="label"
+                    optionValue="value"
+                    [options]="setorOptions()"
+                    formControlName="setorId"
+                  ></p-select>
+                  <label for="edit-setorId">{{ 'tickets.fields.setor' | translate }}</label>
+                </p-floatLabel>
+              </div>
+              <div class="col-12 md:col-4 p-2">
+                <p-floatLabel variant="on" class="w-full">
+                  <p-select
+                    size="small"
+                    class="w-full"
+                    [filter]="true"
+                    appendTo="body"
+                    [showClear]="true"
+                    inputId="edit-equipamentoRefId"
+                    optionLabel="label"
+                    optionValue="value"
+                    [options]="equipamentoOptions()"
+                    formControlName="equipamentoRefId"
+                  ></p-select>
+                  <label for="edit-equipamentoRefId">{{ 'tickets.fields.equipamento' | translate }}</label>
+                </p-floatLabel>
+              </div>
+            </div>
+          </form>
+          <div class="flex justify-content-end gap-2 mt-2">
+            <button
+              pButton
+              type="button"
+              (click)="cancelEdit()"
+              icon="pi pi-times"
+              class="p-button-text p-button-sm"
+              [label]="'common.cancel' | translate"
+              [disabled]="savingEdit()"
+            ></button>
+            <button
+              pButton
+              type="button"
+              (click)="saveEdit()"
+              icon="pi pi-save"
+              class="p-button-sm"
+              [loading]="savingEdit()"
+              [label]="'common.save' | translate"
+              [disabled]="savingEdit()"
+            ></button>
+          </div>
+        }
+      </div>
+
+      <!-- Comentários -->
+      <div class="surface-card border-round p-3 mb-2">
+        <div class="font-semibold mb-2">{{ 'tickets.comments.title' | translate }}</div>
+
+        @if (!comments().length) {
+          <div class="text-center py-3 opacity-70">{{ 'tickets.comments.empty' | translate }}</div>
+        }
+
+        <div class="flex flex-column gap-2 mb-3">
+          @if (hasMoreComments()) {
+            <div class="text-center mb-1">
+              @if (!commentsExpanded()) {
+                <button
+                  pButton
+                  type="button"
+                  class="p-button-text p-button-sm"
+                  icon="pi pi-chevron-up"
+                  [label]="'tickets.comments.showMore' | translate"
+                  (click)="commentsExpanded.set(true)"
+                ></button>
+              } @else {
+                <button
+                  pButton
+                  type="button"
+                  class="p-button-text p-button-sm"
+                  icon="pi pi-chevron-down"
+                  [label]="'tickets.comments.showLess' | translate"
+                  (click)="commentsExpanded.set(false)"
+                ></button>
+              }
+            </div>
+          }
+
+          @for (c of visibleComments(); track c.id) {
+            <div class="flex" [class.justify-content-end]="commentGroup(c) === 'ti'">
+              <div
+                class="border-round p-2 cs-comment-bubble"
+                [class.cs-comment-solicitante]="commentGroup(c) === 'solicitante'"
+                [class.cs-comment-participante]="commentGroup(c) === 'participante'"
+                [class.cs-comment-ti]="commentGroup(c) === 'ti'"
+                [class.cs-comment-internal]="c.interno"
+              >
+                <div class="flex justify-content-between align-items-center gap-2 mb-1">
+                  <span class="font-medium text-sm">{{ c.autorNome ?? '-' }}</span>
+                  <span class="text-xs opacity-70">{{ c.createdAt | csDate: 'short' }}</span>
+                </div>
+                @if (c.interno) {
+                  <div class="text-xs font-semibold mb-1" style="color: var(--orange-600)">
+                    {{ 'tickets.comments.internalTag' | translate }}
+                  </div>
+                }
+                <div class="cs-rich-text" [innerHTML]="c.mensagem"></div>
+
+                @if (c.attachments.length) {
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    @for (a of c.attachments; track a.id) {
+                      <button
+                        pButton
+                        type="button"
+                        icon="pi pi-paperclip"
+                        (click)="downloadAttachment(a.id)"
+                        class="p-button-text p-button-sm"
+                        [pTooltip]="formatBytes(a.tamanhoBytes)"
+                        tooltipPosition="top"
+                        [label]="a.nomeArquivo"
+                      ></button>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (canComment()) {
+          <form [formGroup]="commentForm" class="flex flex-column gap-2">
+            <app-rich-text-editor
+              formControlName="mensagem"
+              [height]="'160px'"
+              [placeholder]="'tickets.comments.placeholder' | translate"
+            ></app-rich-text-editor>
+
+            <div class="flex align-items-center gap-2 flex-wrap">
+              <input #commentFileInput type="file" multiple hidden (change)="onCommentFilesSelected($event)" />
+              <button
+                pButton
+                type="button"
+                icon="pi pi-paperclip"
+                class="p-button-text p-button-sm"
+                [label]="'tickets.fields.attachments' | translate"
+                (click)="commentFileInput.click()"
+              ></button>
+              @if (commentAttachmentFiles().length) {
+                <span class="text-xs opacity-70">
+                  {{ commentAttachmentFiles().length }} {{ 'tickets.attachments.selected' | translate }}
+                </span>
+              }
+            </div>
+
+            <div class="flex align-items-center justify-content-between flex-wrap gap-2">
+              @if (canManage()) {
+                <div class="flex align-items-center gap-2">
+                  <p-checkbox
+                    binary="true"
+                    inputId="interno"
+                    formControlName="interno"
+                  ></p-checkbox>
+                  <label for="interno" class="text-sm">{{ 'tickets.comments.internal' | translate }}</label>
+                </div>
+              } @else {
+                <span></span>
+              }
+              <button
+                pButton
+                type="button"
+                icon="pi pi-send"
+                (click)="sendComment()"
+                class="p-button-sm"
+                [loading]="sendingComment()"
+                [label]="'tickets.comments.send' | translate"
+                [disabled]="sendingComment() || commentForm.controls.mensagem.invalid"
+              ></button>
+            </div>
+          </form>
+        } @else {
+          <div class="text-center text-sm opacity-70 border-round surface-100 p-2">
+            {{ 'tickets.comments.closedTicket' | translate }}
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <div class="col-12 lg:col-4 p-2">
+      <!-- Ações de gestão -->
+      @if (canManage()) {
+        <div class="surface-card border-round p-3 mb-2">
+          <div class="font-semibold mb-2">{{ 'tickets.actions.title' | translate }}</div>
+
+          <div class="mb-3">
+            <label for="changeStatusSelect" class="block text-sm opacity-80 mb-1">{{
+              'tickets.actions.changeStatus' | translate
+            }}</label>
+            <div class="flex gap-2">
+              <p-select
+                size="small"
+                class="w-full"
+                appendTo="body"
+                optionLabel="label"
+                optionValue="value"
+                inputId="changeStatusSelect"
+                [(ngModel)]="selectedNextStatus"
+                [options]="nextStatusOptions()"
+                [placeholder]="'tickets.actions.selectStatus' | translate"
+              ></p-select>
+              <button
+                pButton
+                type="button"
+                icon="pi pi-check"
+                class="p-button-sm"
+                (click)="applyStatusChange()"
+                [loading]="changingStatus()"
+                [disabled]="!selectedNextStatus || changingStatus()"
+                [pTooltip]="'tickets.actions.changeStatus' | translate"
+                [attr.aria-label]="'tickets.actions.changeStatus' | translate"
+                tooltipPosition="top"
+              ></button>
+            </div>
+            @if (!nextStatusOptions().length) {
+              <div class="text-xs opacity-70 mt-1">{{ 'tickets.actions.noTransitions' | translate }}</div>
+            }
+          </div>
+
+          @if (canAssign()) {
+            <div>
+              <label for="assignResponsavelSelect" class="block text-sm opacity-80 mb-1">{{
+                'tickets.actions.assign' | translate
+              }}</label>
+              <div class="flex gap-2">
+                <p-select
+                  size="small"
+                  class="w-full"
+                  [filter]="true"
+                  appendTo="body"
+                  optionLabel="label"
+                  optionValue="value"
+                  [options]="responsavelOptions()"
+                  inputId="assignResponsavelSelect"
+                  [(ngModel)]="selectedResponsavelId"
+                  [placeholder]="'tickets.actions.selectResponsavel' | translate"
+                ></p-select>
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-user-plus"
+                  class="p-button-sm"
+                  (click)="applyAssign()"
+                  [loading]="assigning()"
+                  [disabled]="!selectedResponsavelId || assigning()"
+                  [pTooltip]="'tickets.actions.assign' | translate"
+                  [attr.aria-label]="'tickets.actions.assign' | translate"
+                  tooltipPosition="top"
+                ></button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Participantes ("compartilhado com") -->
+      <div class="surface-card border-round p-3 mb-2">
+        <div class="flex align-items-center justify-content-between mb-2">
+          <div class="font-semibold">{{ 'tickets.participants.title' | translate }}</div>
+          @if (canManageParticipants() && !editingParticipants()) {
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              (click)="openParticipantsEdit()"
+              class="p-button-text p-button-sm"
+              [label]="'common.edit' | translate"
+            ></button>
+          }
+        </div>
+
+        @if (!editingParticipants()) {
+          @if (!participants().length) {
+            <div class="text-center py-2 opacity-70">{{ 'tickets.participants.empty' | translate }}</div>
+          }
+
+          <div class="flex flex-wrap gap-2">
+            @for (p of participants(); track p.userId) {
+              <span class="surface-100 border-round px-2 py-1 text-sm">
+                <i class="pi pi-user mr-1"></i>{{ p.nome ?? p.userId }}
+              </span>
+            }
+          </div>
+        } @else {
+          <p-multiSelect
+            class="w-full"
+            appendTo="body"
+            [filter]="true"
+            display="chip"
+            optionLabel="label"
+            optionValue="value"
+            [options]="participantOptions()"
+            [(ngModel)]="selectedParticipantIds"
+            [placeholder]="'tickets.participants.placeholder' | translate"
+          ></p-multiSelect>
+
+          <div class="flex justify-content-end gap-2 mt-2">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-times"
+              (click)="cancelParticipantsEdit()"
+              class="p-button-text p-button-sm"
+              [label]="'common.cancel' | translate"
+              [disabled]="participantsSaving()"
+            ></button>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-save"
+              (click)="saveParticipants()"
+              class="p-button-sm"
+              [loading]="participantsSaving()"
+              [label]="'common.save' | translate"
+              [disabled]="participantsSaving()"
+            ></button>
+          </div>
+        }
+      </div>
+
+      <!-- Detalhes (mesmo comportamento de expandir/recolher do Histórico) -->
+      <div class="surface-card border-round p-3 mb-2">
+        <div
+          role="button"
+          tabindex="0"
+          class="flex align-items-center justify-content-between cursor-pointer"
+          [attr.aria-expanded]="detailsExpanded()"
+          (click)="detailsExpanded.set(!detailsExpanded())"
+          (keydown.enter)="detailsExpanded.set(!detailsExpanded())"
+          (keydown.space)="detailsExpanded.set(!detailsExpanded())"
+        >
+          <div class="font-semibold">{{ 'tickets.details.title' | translate }}</div>
+          <i class="pi" [class.pi-chevron-down]="!detailsExpanded()" [class.pi-chevron-up]="detailsExpanded()"></i>
+        </div>
+
+        @if (detailsExpanded()) {
+          <dl class="cs-detail-list mt-2">
+            <dt>{{ 'tickets.fields.categoria' | translate }}</dt>
+            <dd>{{ t.categoriaNome ?? '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.setor' | translate }}</dt>
+            <dd>{{ t.setorNome ?? '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.solicitante' | translate }}</dt>
+            <dd>{{ t.solicitanteNome ?? '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.responsavel' | translate }}</dt>
+            <dd>{{ t.responsavelNome ?? '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.equipamento' | translate }}</dt>
+            <dd>{{ t.equipamentoRefNome ?? '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.canalOrigem' | translate }}</dt>
+            <dd>{{ 'tickets.canal.' + t.canalOrigem | translate }}</dd>
+
+            <dt>{{ 'tickets.fields.dataAbertura' | translate }}</dt>
+            <dd>{{ t.dataAbertura ? (t.dataAbertura | csDate: 'short') : '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.dataLimiteSla' | translate }}</dt>
+            <dd [class.text-red-500]="isOverdue()" [class.font-semibold]="isOverdue()">
+              {{ t.dataLimiteSla ? (t.dataLimiteSla | csDate: 'short') : '-' }}
+            </dd>
+
+            <dt>{{ 'tickets.fields.dataResolucao' | translate }}</dt>
+            <dd>{{ t.dataResolucao ? (t.dataResolucao | csDate: 'short') : '-' }}</dd>
+
+            <dt>{{ 'tickets.fields.dataFechamento' | translate }}</dt>
+            <dd>{{ t.dataFechamento ? (t.dataFechamento | csDate: 'short') : '-' }}</dd>
+          </dl>
+        }
+      </div>
+
+      <!-- Histórico (minimizado por padrão - clique no cabeçalho expande/recolhe) -->
+      <div class="surface-card border-round p-3 mb-2">
+        <div
+          role="button"
+          tabindex="0"
+          class="flex align-items-center justify-content-between cursor-pointer"
+          [attr.aria-expanded]="historyExpanded()"
+          (click)="historyExpanded.set(!historyExpanded())"
+          (keydown.enter)="historyExpanded.set(!historyExpanded())"
+          (keydown.space)="historyExpanded.set(!historyExpanded())"
+        >
+          <div class="font-semibold">{{ 'tickets.history.title' | translate }}</div>
+          <i class="pi" [class.pi-chevron-down]="!historyExpanded()" [class.pi-chevron-up]="historyExpanded()"></i>
+        </div>
+
+        @if (historyExpanded()) {
+          @if (!history().length) {
+            <div class="text-center py-2 opacity-70 mt-2">{{ 'tickets.history.empty' | translate }}</div>
+          }
+
+          <div class="flex flex-column gap-2 mt-2">
+            @for (h of history(); track h.id) {
+              <div class="text-sm border-round surface-100 p-2">
+                <div class="flex align-items-center gap-2 flex-wrap">
+                  @if (h.statusAnterior) {
+                    <app-status-badge [tone]="tone(h.statusAnterior)" [label]="'tickets.status.' + h.statusAnterior | translate"></app-status-badge>
+                    <i class="pi pi-arrow-right text-xs"></i>
+                  }
+                  <app-status-badge [tone]="tone(h.statusNovo)" [label]="'tickets.status.' + h.statusNovo | translate"></app-status-badge>
+                </div>
+                <div class="text-xs opacity-70 mt-1">
+                  {{ h.usuarioNome ?? '-' }} • {{ h.timestamp | csDate: 'short' }}
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="text-center py-6 opacity-70">{{ 'tickets.detail.notFound' | translate }}</div>
+}

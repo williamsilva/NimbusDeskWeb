@@ -19,6 +19,12 @@ export const appRoutes: Routes = [
       },
 
       {
+        path: 'tickets',
+        loadChildren: () =>
+          import('./features/tickets/tickets.routes').then((m) => m.TICKETS_ROUTES),
+      },
+
+      {
         path: 'security',
         loadChildren: () =>
           import('./features/security/security.routes').then((m) => m.SECURITY_ROUTES),

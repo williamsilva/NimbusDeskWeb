@@ -29,6 +29,29 @@
       },
       "emailLog": {
         "title": "Auditoría de E-mail"
+      },
+      "categorias": {
+        "title": "Categorías"
+      },
+      "slas": {
+        "title": "SLAs"
+      },
+      "setoresTi": {
+        "title": "Sectores de TI"
+      },
+      "ticketAutomation": {
+        "title": "Automatización de tickets"
+      }
+    },
+    "tickets": {
+      "list": {
+        "title": "Tickets"
+      },
+      "new": {
+        "title": "Nuevo ticket"
+      },
+      "detail": {
+        "title": "Detalle del ticket"
       }
     },
     "dashboard": {
@@ -58,6 +81,7 @@
     "me": "Mi cuenta",
     "more": "Más",
     "dashboard": "Dashboard",
+    "tickets": "Tickets",
     "security": {
       "title": "Seguridad",
       "groups": "Grupos",
@@ -69,7 +93,11 @@
       "title": "Configuraciones",
       "email": "Configuración de E-mail",
       "backup": "Backup",
-      "emailLog": "Auditoría de E-mail"
+      "emailLog": "Auditoría de E-mail",
+      "categorias": "Categorías",
+      "slas": "SLAs",
+      "setoresTi": "Sectores de TI",
+      "ticketAutomation": "Automatización de tickets"
     }
   },
   "sidebar": {
@@ -79,6 +107,7 @@
   "breadcrumb": {
     "groups": "Grupos",
     "users": "Usuarios",
+    "tickets": "Tickets",
     "dashboard": {
       "title": "Dashboard"
     }
@@ -449,6 +478,17 @@
     "logout": "Salir",
     "close": "Cerrar",
     "clear": "Limpiar",
+    "search": {
+      "title": "Buscar"
+    },
+    "timeAgo": {
+      "justNow": "Ahora mismo",
+      "minutes": "{count, plural, one {Hace un minuto} other {Hace # minutos}}",
+      "hours": "{count, plural, one {Hace una hora} other {Hace # horas}}",
+      "days": "{count, plural, one {Hace un día} other {Hace # días}}",
+      "months": "{count, plural, one {Hace un mes} other {Hace # meses}}",
+      "years": "{count, plural, one {Hace un año} other {Hace # años}}"
+    },
     "quantity": "Cant.",
     "status": "Estado",
     "apply": "Aplicar",
@@ -558,6 +598,25 @@
       "saveError": "No fue posible guardar la configuración de correo."
     }
   },
+  "ticketAutomation": {
+    "settings": {
+      "subtitle": "Periodicidad de los jobs automáticos de tickets (alertas por correo y auto-cierre).",
+      "unassignedAlertTitle": "Alerta de ticket sin responsable",
+      "pendingResponseAlertTitle": "Alerta de respuesta pendiente",
+      "autoCloseTitle": "Auto-cierre de tickets resueltos",
+      "saved": "Configuración de automatización guardada con éxito.",
+      "saveError": "No fue posible guardar la configuración de automatización."
+    },
+    "fields": {
+      "periodicidadeDias": "Periodicidad de envío (días)",
+      "unassignedAlertPeriodicidadeDiasHint": "Cada cuántos días reenviar, al equipo de TI, el correo con los tickets ABIERTOS sin responsable asignado.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "Cada cuántos días reenviar el correo avisando al solicitante (y compartidos) o al responsable que hay ticket(s) esperando su respuesta.",
+      "autoClosePeriodicidadeDias": "Periodicidad de ejecución (días)",
+      "autoClosePeriodicidadeDiasHint": "Cada cuántos días se ejecuta el job de auto-cierre.",
+      "autoCloseCarenciaDias": "Carencia antes de cerrar (días)",
+      "autoCloseCarenciaDiasHint": "Cuántos días un ticket debe permanecer Resuelto antes de cerrarse automáticamente."
+    }
+  },
   "emailLog": {
     "subtitle": "Registro de todos los correos enviados por el sistema - destinatarios, asunto, estado y cuerpo.",
     "columns": {
@@ -614,7 +673,246 @@
   },
   "dashboard": {
     "subtitle": "Panel inicial",
-    "empty": "Dashboard en construcción",
-    "emptyHint": "Ningún módulo de negocio configurado todavía. Este espacio mostrará los indicadores del NimbusDesk en cuanto haya datos."
+    "welcome": "Bienvenido a NimbusDesk",
+    "welcomeHint": "Abra un ticket o siga sus tickets en curso.",
+    "myTicketsLink": "Mis tickets",
+    "kpi": {
+      "total": "Total de tickets",
+      "slaOverdue": "SLA vencido",
+      "categories": "Categorías con tickets"
+    },
+    "charts": {
+      "byStatus": {
+        "title": "Tickets por estado"
+      },
+      "byCategory": {
+        "title": "Tickets por categoría"
+      }
+    },
+    "slaOverdueList": {
+      "title": "Tickets con SLA vencido",
+      "empty": "Ningún ticket con SLA vencido."
+    }
+  },
+  "tickets": {
+    "subtitle": "Abra y siga tickets de TI",
+    "new": {
+      "title": "Nuevo ticket",
+      "subtitle": "Apertura de ticket"
+    },
+    "empty": {
+      "title": "Ningún ticket encontrado"
+    },
+    "detail": {
+      "notFound": "Ticket no encontrado."
+    },
+    "sla": {
+      "overdue": "SLA vencido"
+    },
+    "scope": {
+      "mine": "Mis tickets",
+      "waiting": "Esperando mi acción",
+      "shared": "Compartidos conmigo",
+      "queue": "Cola de atención",
+      "all": "Todos"
+    },
+    "fields": {
+      "titulo": "Título",
+      "descricao": "Descripción",
+      "categoria": "Categoría",
+      "setor": "Sector",
+      "equipamento": "Equipo",
+      "attachments": "Adjuntos",
+      "status": "Estado",
+      "prioridade": "Prioridad",
+      "solicitante": "Solicitante",
+      "responsavel": "Responsable",
+      "canalOrigem": "Canal de origen",
+      "dataAbertura": "Abierto en",
+      "dataLimiteSla": "Límite del SLA",
+      "dataResolucao": "Resuelto en",
+      "dataFechamento": "Cerrado en"
+    },
+    "columns": {
+      "numero": "Número",
+      "titulo": "Título",
+      "categoria": "Categoría",
+      "setor": "Sector",
+      "prioridade": "Prioridad",
+      "status": "Estado",
+      "solicitante": "Solicitante",
+      "dataAbertura": "Abierto en",
+      "sla": "SLA",
+      "atualizacao": "Actualización"
+    },
+    "status": {
+      "ABERTO": "Abierto",
+      "EM_ANDAMENTO": "En curso",
+      "AGUARDANDO_SOLICITANTE": "Esperando al solicitante",
+      "AGUARDANDO_RESPOSTA": "Esperando respuesta",
+      "RESOLVIDO": "Resuelto",
+      "FECHADO": "Cerrado",
+      "CANCELADO": "Cancelado"
+    },
+    "priority": {
+      "URGENTE": "Urgente",
+      "ALTA": "Alta",
+      "MEDIA": "Media",
+      "BAIXA": "Baja"
+    },
+    "canal": {
+      "PORTAL": "Portal",
+      "EMAIL": "E-mail",
+      "TELEFONE": "Teléfono"
+    },
+    "form": {
+      "invalid": "Verifique los campos obligatorios del formulario.",
+      "created": "Ticket creado con éxito.",
+      "updated": "Ticket actualizado con éxito.",
+      "saveError": "No fue posible guardar el ticket."
+    },
+    "actions": {
+      "title": "Acciones",
+      "changeStatus": "Cambiar estado",
+      "selectStatus": "Seleccione el nuevo estado",
+      "noTransitions": "Ninguna transición de estado disponible.",
+      "assign": "Asignar responsable",
+      "selectResponsavel": "Seleccione el responsable"
+    },
+    "action": {
+      "statusChanged": "Estado actualizado con éxito.",
+      "statusChangeError": "No fue posible actualizar el estado.",
+      "assigned": "Responsable asignado con éxito.",
+      "assignError": "No fue posible asignar el responsable.",
+      "assignToMe": "Asignarme"
+    },
+    "comments": {
+      "title": "Comentarios",
+      "empty": "Ningún comentario todavía.",
+      "placeholder": "Escriba un comentario...",
+      "send": "Enviar",
+      "internal": "Comentario interno",
+      "internalTag": "Interno",
+      "showMore": "Ver más",
+      "showLess": "Ver menos",
+      "closedTicket": "Este ticket está cerrado y ya no acepta interacciones."
+    },
+    "comment": {
+      "saveError": "No fue posible enviar el comentario."
+    },
+    "attachments": {
+      "selected": "archivo(s) seleccionado(s)"
+    },
+    "participants": {
+      "title": "Compartido con",
+      "empty": "Nadie fue agregado todavía.",
+      "placeholder": "Seleccione quién debe seguir este ticket",
+      "saved": "Participantes actualizados.",
+      "saveError": "No fue posible actualizar los participantes."
+    },
+    "attachment": {
+      "saveError": "No fue posible enviar el adjunto.",
+      "urlError": "No fue posible obtener el enlace del adjunto."
+    },
+    "history": {
+      "title": "Historial de estado",
+      "empty": "Ningún cambio de estado registrado."
+    },
+    "details": {
+      "title": "Detalles"
+    }
+  },
+  "categorias": {
+    "subtitle": "Gestione las categorías de tickets",
+    "new": {
+      "title": "Nueva categoría"
+    },
+    "edit": {
+      "title": "Editar categoría"
+    },
+    "empty": {
+      "title": "Ninguna categoría encontrada"
+    },
+    "action": {
+      "noPermission": "No tiene permiso para editar categorías."
+    },
+    "fields": {
+      "nome": "Nombre",
+      "sla": "SLA",
+      "ativo": "Activo"
+    },
+    "columns": {
+      "nome": "Nombre",
+      "sla": "SLA",
+      "ativo": "Activo"
+    },
+    "form": {
+      "invalid": "Verifique los campos obligatorios del formulario.",
+      "created": "Categoría creada con éxito.",
+      "updated": "Categoría actualizada con éxito.",
+      "saveError": "No fue posible guardar la categoría."
+    }
+  },
+  "slas": {
+    "subtitle": "Gestione los SLAs de atención",
+    "new": {
+      "title": "Nuevo SLA"
+    },
+    "edit": {
+      "title": "Editar SLA"
+    },
+    "empty": {
+      "title": "Ningún SLA encontrado"
+    },
+    "action": {
+      "noPermission": "No tiene permiso para editar SLAs."
+    },
+    "fields": {
+      "nome": "Nombre",
+      "tempoResposta": "Tiempo de respuesta (min)",
+      "tempoResolucao": "Tiempo de resolución (min)"
+    },
+    "columns": {
+      "nome": "Nombre",
+      "tempoResposta": "Tiempo de respuesta",
+      "tempoResolucao": "Tiempo de resolución"
+    },
+    "form": {
+      "invalid": "Verifique los campos obligatorios del formulario.",
+      "created": "SLA creado con éxito.",
+      "updated": "SLA actualizado con éxito.",
+      "saveError": "No fue posible guardar el SLA."
+    }
+  },
+  "setoresTi": {
+    "subtitle": "Gestione los sectores de TI",
+    "new": {
+      "title": "Nuevo sector"
+    },
+    "edit": {
+      "title": "Editar sector"
+    },
+    "empty": {
+      "title": "Ningún sector encontrado"
+    },
+    "action": {
+      "noPermission": "No tiene permiso para editar sectores."
+    },
+    "fields": {
+      "nome": "Nombre",
+      "users": "Usuarios",
+      "ativo": "Activo"
+    },
+    "columns": {
+      "nome": "Nombre",
+      "users": "Usuarios",
+      "ativo": "Activo"
+    },
+    "form": {
+      "invalid": "Verifique los campos obligatorios del formulario.",
+      "created": "Sector creado con éxito.",
+      "updated": "Sector actualizado con éxito.",
+      "saveError": "No fue posible guardar el sector."
+    }
   }
 }
