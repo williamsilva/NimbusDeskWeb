@@ -1,20 +1,26 @@
 import { TicketModel } from '@models/tickets.models';
 
 /** Espelha a resposta de GET /bff/v1/tickets/dashboard (com.nimbusdesk.tickets.dto.response.
- *  TicketDashboardResponse) - ver PROJECT_SPEC.md. */
+ *  TicketDashboardResponse) - ver PROJECT_SPEC.md. 2026-09-09: nomes de campo corrigidos pros
+ *  reais do backend (quantidade/tickets) - a versão anterior (count/total/itens) nunca tinha sido
+ *  conferida contra a resposta de verdade (mesma classe de bug já achada e corrigida em
+ *  NimbusFlowInternalClient.EquipamentoDto), fazia o dashboard inteiro renderizar zerado/vazio em
+ *  produção mesmo com chamados reais cadastrados (só "Categorias com chamados" escapava, por
+ *  contar o tamanho do array em vez de ler o campo). */
 export interface TicketDashboardStatusCountModel {
   status: string;
-  count: number;
+  quantidade: number;
 }
 
 export interface TicketDashboardCategoryCountModel {
+  categoriaId: string;
   categoriaNome: string;
-  count: number;
+  quantidade: number;
 }
 
 export interface TicketDashboardSlaOverdueModel {
-  total: number;
-  itens: TicketModel[];
+  quantidade: number;
+  tickets: TicketModel[];
 }
 
 export interface TicketDashboardModel {
@@ -30,8 +36,8 @@ export function mapTicketDashboardApiModel(input: TicketDashboardApiModel): Tick
     porStatus: input?.porStatus ?? [],
     porCategoria: input?.porCategoria ?? [],
     slaEstourado: {
-      total: input?.slaEstourado?.total ?? 0,
-      itens: input?.slaEstourado?.itens ?? [],
+      quantidade: input?.slaEstourado?.quantidade ?? 0,
+      tickets: input?.slaEstourado?.tickets ?? [],
     },
   };
 }

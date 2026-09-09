@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
   private readonly primaryColor = computed(() => this.cssVar('--primary-color', '#0d9488'));
 
   readonly totalTickets = computed(() =>
-    (this.facade.data()?.porStatus ?? []).reduce((sum, item) => sum + (item.count ?? 0), 0),
+    (this.facade.data()?.porStatus ?? []).reduce((sum, item) => sum + (item.quantidade ?? 0), 0),
   );
 
   readonly statusChartData = computed(() => {
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
       labels: items.map((item) => this.statusLabel(item.status)),
       datasets: [
         {
-          data: items.map((item) => item.count),
+          data: items.map((item) => item.quantidade),
           backgroundColor: items.map((item) => STATUS_COLORS[item.status as TicketStatusEnum] ?? '#94a3b8'),
           borderWidth: 0,
         },
@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
 
     return {
       labels: items.map((item) => item.categoriaNome),
-      datasets: [{ data: items.map((item) => item.count), backgroundColor: color, borderRadius: 4, maxBarThickness: 40 }],
+      datasets: [{ data: items.map((item) => item.quantidade), backgroundColor: color, borderRadius: 4, maxBarThickness: 40 }],
     };
   });
 
