@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 
-// Sem 'FILES' aqui de propósito - esta base do NimbusDesk ainda não tem storage de arquivos.
-export type BackupTarget = 'NIMBUSDESK_DB' | 'NIMBUSAUTH_DB';
+/** 2026-09-09: 'FILES' adicionado (bucket de anexos "nimbusdesk-attachments", ver
+ *  com.nimbusdesk.common.backup.S3VolumeZipper) - mesmo padrão já usado no NimbusFlow. */
+export type BackupTarget = 'NIMBUSDESK_DB' | 'NIMBUSAUTH_DB' | 'FILES';
 
 @Injectable({ providedIn: 'root' })
 export class BackupApiService {

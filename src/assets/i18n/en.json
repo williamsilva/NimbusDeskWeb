@@ -653,12 +653,13 @@
   },
   "backup": {
     "settings": {
-      "subtitle": "Generates an on-demand backup of the databases, for immediate download.",
+      "subtitle": "Generates an on-demand backup of the databases and/or attachments, for immediate download.",
       "targetsTitle": "What to include in the backup",
       "nimbusdeskDb": "NimbusDesk database",
       "nimbusauthDb": "NimbusAuth database",
+      "files": "Ticket attachments",
       "executeButton": "Run Backup",
-      "executeHint": "May take a few minutes depending on the size of the databases. Do not close this page while the backup is running.",
+      "executeHint": "May take a few minutes depending on the size of the databases and the number of attachments. Do not close this page while the backup is running.",
       "noSelection": "Select at least one item to include in the backup.",
       "executed": "Backup generated successfully — the download should start automatically.",
       "executeError": "Could not generate the backup. Please try again."
