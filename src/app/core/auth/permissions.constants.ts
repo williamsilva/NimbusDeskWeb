@@ -1,10 +1,6 @@
 export const PERMISSIONS = {
   SUPPORT: 'SUPPORT',
 
-  SETTINGS: {
-    BACKUP_PROCESS: 'BACKUP_PROCESS',
-  },
-
   /* Chamados de TI (com.nimbusdesk.tickets no backend, app_key='nimbusdesk') - ver PROJECT_SPEC.md */
   CHAMADO: {
     VIEW: 'CHAMADO_CONSULT',
