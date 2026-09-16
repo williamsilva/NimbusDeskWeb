@@ -4,21 +4,7 @@ import { permissionGuard } from '@core/auth/permission.guard';
 import { PERMISSIONS } from '@core/auth/permissions.constants';
 
 export const SETTINGS_ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'email-log' },
-  {
-    path: 'email-log',
-    title: 'routes.settings.emailLog.title',
-    canActivate: [permissionGuard],
-    data: {
-      requireAll: false,
-      redirectTo: '/forbidden',
-      permissions: [PERMISSIONS.SUPPORT, PERMISSIONS.SETTINGS.EMAIL_LOG_VIEW],
-    },
-    loadComponent: () =>
-      import('./email-log/email-log-list.component').then(
-        (m) => m.EmailLogListComponent,
-      ),
-  },
+  { path: '', pathMatch: 'full', redirectTo: 'categorias' },
   {
     path: 'categorias',
     title: 'routes.settings.categorias.title',

@@ -18,17 +18,6 @@ export const STATE_KEY = {
       },
     },
 
-    /* Configurações > Auditoria de E-mail (com.nimbusdesk.common.notification.mail no backend) */
-    SETTINGS: {
-      EMAIL_LOG: {
-        TABLE: {
-          ROWS: { V1: 'email-log.table.rows' },
-          STATE: { V1: 'nimbusdesk.email-log.table.state.v1' },
-        },
-        FILTERS: { V1: 'nimbusdesk.email-log.filters.v1' },
-      },
-    },
-
     /* Chamados de TI (com.nimbusdesk.tickets no backend) */
     TICKETS: {
       TABLE: {
