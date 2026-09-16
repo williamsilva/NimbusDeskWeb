@@ -145,7 +145,7 @@
         ></button>
         @if (selectedFiles().length) {
           <span class="text-xs opacity-70 ml-2">
-            {{ selectedFiles().length }} {{ 'tickets.attachments.selected' | translate }}
+            {{ 'tickets.attachments.selected' | translate: { count: selectedFiles().length } }}
           </span>
         }
       </div>

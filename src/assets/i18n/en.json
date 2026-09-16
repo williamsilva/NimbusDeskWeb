@@ -610,7 +610,7 @@
     "fields": {
       "periodicidadeDias": "Send periodicity (days)",
       "unassignedAlertPeriodicidadeDiasHint": "How often (in days) to resend, to IT staff, the email listing OPEN tickets with no assigned owner.",
-      "pendingResponseAlertPeriodicidadeDiasHint": "How often (in days) to resend the email telling the requester (and shared users) or the assignee there are ticket(s) waiting on their reply.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "How often (in days) to resend the email telling the requester (and shared users) or the assignee there are tickets waiting on their reply.",
       "autoClosePeriodicidadeDias": "Run periodicity (days)",
       "autoClosePeriodicidadeDiasHint": "How often (in days) the auto-close job runs.",
       "autoCloseCarenciaDias": "Grace period before closing (days)",
@@ -802,7 +802,7 @@
       "saveError": "Could not send the comment."
     },
     "attachments": {
-      "selected": "file(s) selected"
+      "selected": "{count, plural, one {# file selected} other {# files selected}}"
     },
     "participants": {
       "title": "Shared with",

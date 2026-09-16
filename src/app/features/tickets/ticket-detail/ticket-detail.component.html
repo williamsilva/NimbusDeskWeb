@@ -248,7 +248,7 @@
               ></button>
               @if (commentAttachmentFiles().length) {
                 <span class="text-xs opacity-70">
-                  {{ commentAttachmentFiles().length }} {{ 'tickets.attachments.selected' | translate }}
+                  {{ 'tickets.attachments.selected' | translate: { count: commentAttachmentFiles().length } }}
                 </span>
               }
             </div>

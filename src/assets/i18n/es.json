@@ -610,7 +610,7 @@
     "fields": {
       "periodicidadeDias": "Periodicidad de envío (días)",
       "unassignedAlertPeriodicidadeDiasHint": "Cada cuántos días reenviar, al equipo de TI, el correo con los tickets ABIERTOS sin responsable asignado.",
-      "pendingResponseAlertPeriodicidadeDiasHint": "Cada cuántos días reenviar el correo avisando al solicitante (y compartidos) o al responsable que hay ticket(s) esperando su respuesta.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "Cada cuántos días reenviar el correo avisando al solicitante (y compartidos) o al responsable que hay tickets esperando su respuesta.",
       "autoClosePeriodicidadeDias": "Periodicidad de ejecución (días)",
       "autoClosePeriodicidadeDiasHint": "Cada cuántos días se ejecuta el job de auto-cierre.",
       "autoCloseCarenciaDias": "Carencia antes de cerrar (días)",
@@ -802,7 +802,7 @@
       "saveError": "No fue posible enviar el comentario."
     },
     "attachments": {
-      "selected": "archivo(s) seleccionado(s)"
+      "selected": "{count, plural, one {# archivo seleccionado} other {# archivos seleccionados}}"
     },
     "participants": {
       "title": "Compartido con",

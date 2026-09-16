@@ -610,7 +610,7 @@
     "fields": {
       "periodicidadeDias": "Periodicidade do envio (dias)",
       "unassignedAlertPeriodicidadeDiasHint": "A cada quantos dias reenviar, pro T.I., o e-mail listando os chamados ABERTO sem responsável atribuído.",
-      "pendingResponseAlertPeriodicidadeDiasHint": "A cada quantos dias reenviar o e-mail avisando o solicitante (e compartilhados) ou o responsável que há chamado(s) aguardando a resposta dele.",
+      "pendingResponseAlertPeriodicidadeDiasHint": "A cada quantos dias reenviar o e-mail avisando o solicitante (e compartilhados) ou o responsável que há chamados aguardando a resposta dele.",
       "autoClosePeriodicidadeDias": "Periodicidade da execução (dias)",
       "autoClosePeriodicidadeDiasHint": "A cada quantos dias o job de auto-fechamento roda.",
       "autoCloseCarenciaDias": "Carência antes de fechar (dias)",
@@ -802,7 +802,7 @@
       "saveError": "Não foi possível enviar o comentário."
     },
     "attachments": {
-      "selected": "arquivo(s) selecionado(s)"
+      "selected": "{count, plural, one {# arquivo selecionado} other {# arquivos selecionados}}"
     },
     "participants": {
       "title": "Compartilhado com",
