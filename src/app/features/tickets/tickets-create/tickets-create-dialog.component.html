@@ -148,6 +148,13 @@
             {{ 'tickets.attachments.selected' | translate: { count: selectedFiles().length } }}
           </span>
         }
+        @if (selectedFiles().length) {
+          <div class="flex align-items-center gap-2 flex-wrap mt-2">
+            @for (file of selectedFiles(); track $index) {
+              <p-chip [label]="file.name" [removable]="true" (onRemove)="removeSelectedFile($index)"></p-chip>
+            }
+          </div>
+        }
       </div>
     </div>
   </form>

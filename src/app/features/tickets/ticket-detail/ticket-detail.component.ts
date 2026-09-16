@@ -6,6 +6,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { debounceTime, filter } from 'rxjs/operators';
 
 import { CardModule } from 'primeng/card';
+import { ChipModule } from 'primeng/chip';
 import { SelectModule } from 'primeng/select';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -55,6 +56,7 @@ export type TicketCommentGroup = 'solicitante' | 'participante' | 'ti';
   styleUrl: './ticket-detail.component.scss',
   imports: [
     CardModule,
+    ChipModule,
     FormsModule,
     SelectModule,
     ButtonModule,
@@ -402,9 +404,19 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** Acumula com o que já estava selecionado (achado real 2026-09-17: reabrir o seletor pra
+   *  anexar mais um arquivo substituía a seleção anterior inteira, não somava) - resetar
+   *  `input.value` depois é o que permite selecionar de novo o MESMO arquivo caso o usuário
+   *  remova e queira readicionar (sem isso o `change` não dispara duas vezes pro mesmo arquivo). */
   onCommentFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.commentAttachmentFiles.set(input.files ? Array.from(input.files) : []);
+    const newFiles = input.files ? Array.from(input.files) : [];
+    this.commentAttachmentFiles.update((files) => [...files, ...newFiles]);
+    input.value = '';
+  }
+
+  removeCommentAttachment(index: number): void {
+    this.commentAttachmentFiles.update((files) => files.filter((_, i) => i !== index));
   }
 
   /** Anexo só existe vinculado a um comentário (ver PROJECT_SPEC.md/2026-09-08) - envia junto,

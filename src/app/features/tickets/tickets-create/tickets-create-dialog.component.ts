@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 
 import { CardModule } from 'primeng/card';
+import { ChipModule } from 'primeng/chip';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -53,6 +54,7 @@ import { TicketPriorityEnum, TICKET_PRIORITY_VALUES } from '@models/enums/ticket
   templateUrl: './tickets-create-dialog.component.html',
   imports: [
     CardModule,
+    ChipModule,
     ToastModule,
     DialogModule,
     SelectModule,
@@ -162,9 +164,19 @@ export class TicketsCreateDialogComponent {
     });
   }
 
+  /** Acumula com o que já estava selecionado (achado real 2026-09-17: reabrir o seletor pra
+   *  anexar mais um arquivo substituía a seleção anterior inteira, não somava) - resetar
+   *  `input.value` depois é o que permite selecionar de novo o MESMO arquivo caso o usuário
+   *  remova e queira readicionar (sem isso o `change` não dispara duas vezes pro mesmo arquivo). */
   onFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.selectedFiles.set(input.files ? Array.from(input.files) : []);
+    const newFiles = input.files ? Array.from(input.files) : [];
+    this.selectedFiles.update((files) => [...files, ...newFiles]);
+    input.value = '';
+  }
+
+  removeSelectedFile(index: number): void {
+    this.selectedFiles.update((files) => files.filter((_, i) => i !== index));
   }
 
   onHide(): void {

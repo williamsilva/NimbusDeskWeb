@@ -252,6 +252,13 @@
                 </span>
               }
             </div>
+            @if (commentAttachmentFiles().length) {
+              <div class="flex align-items-center gap-2 flex-wrap">
+                @for (file of commentAttachmentFiles(); track $index) {
+                  <p-chip [label]="file.name" [removable]="true" (onRemove)="removeCommentAttachment($index)"></p-chip>
+                }
+              </div>
+            }
 
             <div class="flex align-items-center justify-content-between flex-wrap gap-2">
               @if (canManage()) {
