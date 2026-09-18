@@ -1,4 +1,5 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { NimbusLayoutMode } from '@williamsilva/nimbus-web-commons';
 
 /**
  * Estado de layout (Sakai-like) compartilhado entre Topbar/Sidebar/Layout.
@@ -7,9 +8,13 @@ import { Injectable, effect, signal } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class LayoutStateService {
   private static readonly STORAGE_KEY = 'nimbusdesk.layout.sidebarVisible';
+  private static readonly MODE_STORAGE_KEY = 'nimbusdesk.layout.mode';
 
   /** Controla se o menu lateral está visível. */
   readonly sidebarVisible = signal(true);
+
+  /** Modo de layout (Static/Slim/Horizontal/Drawer) escolhido pelo usuário em runtime. */
+  readonly layoutMode = signal<NimbusLayoutMode>('static');
 
   constructor() {
     if (!this.isBrowser()) return;
@@ -39,6 +44,15 @@ export class LayoutStateService {
         String(this.sidebarVisible())
       );
     });
+
+    const savedMode = window.localStorage.getItem(LayoutStateService.MODE_STORAGE_KEY);
+    if (savedMode === 'static' || savedMode === 'slim' || savedMode === 'horizontal' || savedMode === 'drawer') {
+      this.layoutMode.set(savedMode);
+    }
+
+    effect(() => {
+      window.localStorage.setItem(LayoutStateService.MODE_STORAGE_KEY, this.layoutMode());
+    });
   }
 
   private isBrowser(): boolean {
@@ -55,5 +69,9 @@ export class LayoutStateService {
 
   hideSidebar(): void {
     this.sidebarVisible.set(false);
+  }
+
+  setLayoutMode(mode: NimbusLayoutMode): void {
+    this.layoutMode.set(mode);
   }
 }
