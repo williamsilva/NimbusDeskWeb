@@ -656,7 +656,7 @@
       "subtitle": "Generates an on-demand backup of the databases and/or attachments, for immediate download.",
       "targetsTitle": "What to include in the backup",
       "nimbusdeskDb": "NimbusDesk database",
-      "nimbusauthDb": "NimbusAuth database",
+      "nimbusauthDb": "NimbusCore database",
       "files": "Ticket attachments",
       "executeButton": "Run Backup",
       "executeHint": "May take a few minutes depending on the size of the databases and the number of attachments. Do not close this page while the backup is running.",

@@ -656,7 +656,7 @@
       "subtitle": "Gera um backup sob demanda dos bancos de dados e/ou dos anexos, para download imediato.",
       "targetsTitle": "O que incluir no backup",
       "nimbusdeskDb": "Banco de dados do NimbusDesk",
-      "nimbusauthDb": "Banco de dados NimbusAuth",
+      "nimbusauthDb": "Banco de dados NimbusCore",
       "files": "Anexos de chamados",
       "executeButton": "Executar Backup",
       "executeHint": "Pode demorar alguns minutos, dependendo do tamanho dos bancos e da quantidade de anexos. Não feche esta página enquanto o backup estiver em andamento.",

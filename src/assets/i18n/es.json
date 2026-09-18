@@ -656,7 +656,7 @@
       "subtitle": "Genera un backup bajo demanda de los bancos de datos y/o de los adjuntos, para descarga inmediata.",
       "targetsTitle": "Qué incluir en el backup",
       "nimbusdeskDb": "Base de datos NimbusDesk",
-      "nimbusauthDb": "Base de datos NimbusAuth",
+      "nimbusauthDb": "Base de datos NimbusCore",
       "files": "Adjuntos de tickets",
       "executeButton": "Ejecutar Backup",
       "executeHint": "Puede demorar algunos minutos, según el tamaño de los bancos de datos y la cantidad de adjuntos. No cierre esta página mientras el backup esté en curso.",
