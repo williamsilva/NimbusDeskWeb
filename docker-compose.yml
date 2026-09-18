@@ -9,9 +9,12 @@ services:
       dockerfile: Dockerfile.dev
       # NODE_AUTH_TOKEN: mesmo achado do backend (GITHUB_ACTOR/GITHUB_TOKEN), versão npm - o
       # .npmrc do projeto (@williamsilva:registry) precisa dessa var pra autenticar no GitHub
-      # Packages durante `npm ci`. Sete num .env (não commitado).
-      args:
-        NODE_AUTH_TOKEN: ${NODE_AUTH_TOKEN}
+      # Packages durante `npm ci`. Sete num .env (não commitado). Via secrets (não args/build-arg)
+      # - achado real 2026-09-19: build-arg (+ o antigo `ENV NODE_AUTH_TOKEN=$NODE_AUTH_TOKEN` do
+      # Dockerfile.dev) deixava o token gravado permanentemente na imagem/container; secret só
+      # existe durante o RUN que o monta explicitamente, mesmo padrão já usado no CardSyncWeb.
+      secrets:
+        - node_auth_token
     ports:
       # 4204 - próxima porta livre da convenção do workspace (cardsync 4201, nimbusflow 4202,
       # nimbusnovax 4203).
@@ -28,3 +31,7 @@ services:
 volumes:
   web-node-modules:
   web-angular-cache:
+
+secrets:
+  node_auth_token:
+    environment: NODE_AUTH_TOKEN
