@@ -33,10 +33,10 @@
 
 <div class="flex justify-content-start mb-2">
   <p-selectButton
-    [options]="scopeOptions()"
     optionLabel="label"
     optionValue="value"
     [ngModel]="scope()"
+    [options]="scopeOptions()"
     (ngModelChange)="onScopeChange($event)"
   >
     <ng-template pTemplate="item" let-option>
@@ -175,7 +175,7 @@
         <col style="width: 150px" />
         <col style="width: 90px" />
         <col style="width: 130px" />
-        <col style="width: 90px" />
+        <col style="width: 70px" />
       </colgroup>
     </ng-template>
 
@@ -183,9 +183,12 @@
       <tr>
         <th pSortableColumn="numero">
           <div class="th-flex text-center">
-            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.numero' | translate">{{
-              'tickets.columns.numero' | translate
-            }}</span>
+            <span
+              class="th-label"
+              tooltipPosition="top"
+              [pTooltip]="'tickets.columns.numero' | translate"
+              >{{ 'tickets.columns.numero' | translate }}</span
+            >
             <span class="th-icons">
               <p-sortIcon field="numero"></p-sortIcon>
             </span>
@@ -194,9 +197,12 @@
 
         <th pSortableColumn="titulo">
           <div class="th-flex text-center">
-            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.titulo' | translate">{{
-              'tickets.columns.titulo' | translate
-            }}</span>
+            <span
+              class="th-label"
+              tooltipPosition="top"
+              [pTooltip]="'tickets.columns.titulo' | translate"
+              >{{ 'tickets.columns.titulo' | translate }}</span
+            >
             <span class="th-icons">
               <p-sortIcon field="titulo"></p-sortIcon>
               <p-columnFilter
@@ -215,28 +221,40 @@
         </th>
 
         <th class="text-center">
-          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.categoria' | translate">{{
-            'tickets.columns.categoria' | translate
-          }}</span>
+          <span
+            class="th-label"
+            tooltipPosition="top"
+            [pTooltip]="'tickets.columns.categoria' | translate"
+            >{{ 'tickets.columns.categoria' | translate }}</span
+          >
         </th>
 
         <th class="text-center">
-          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.setor' | translate">{{
-            'tickets.columns.setor' | translate
-          }}</span>
+          <span
+            class="th-label"
+            tooltipPosition="top"
+            [pTooltip]="'tickets.columns.setor' | translate"
+            >{{ 'tickets.columns.setor' | translate }}</span
+          >
         </th>
 
         <th class="text-center">
-          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.prioridade' | translate">{{
-            'tickets.columns.prioridade' | translate
-          }}</span>
+          <span
+            class="th-label"
+            tooltipPosition="top"
+            [pTooltip]="'tickets.columns.prioridade' | translate"
+            >{{ 'tickets.columns.prioridade' | translate }}</span
+          >
         </th>
 
         <th pSortableColumn="status">
           <div class="th-flex text-center">
-            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.status' | translate">{{
-              'tickets.columns.status' | translate
-            }}</span>
+            <span
+              class="th-label"
+              tooltipPosition="top"
+              [pTooltip]="'tickets.columns.status' | translate"
+              >{{ 'tickets.columns.status' | translate }}</span
+            >
             <span class="th-icons">
               <p-sortIcon field="status"></p-sortIcon>
               <p-columnFilter
@@ -267,16 +285,22 @@
         </th>
 
         <th class="text-center">
-          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.solicitante' | translate">{{
-            'tickets.columns.solicitante' | translate
-          }}</span>
+          <span
+            class="th-label"
+            tooltipPosition="top"
+            [pTooltip]="'tickets.columns.solicitante' | translate"
+            >{{ 'tickets.columns.solicitante' | translate }}</span
+          >
         </th>
 
         <th pSortableColumn="dataAbertura">
           <div class="th-flex text-center">
-            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.dataAbertura' | translate">{{
-              'tickets.columns.dataAbertura' | translate
-            }}</span>
+            <span
+              class="th-label"
+              tooltipPosition="top"
+              [pTooltip]="'tickets.columns.dataAbertura' | translate"
+              >{{ 'tickets.columns.dataAbertura' | translate }}</span
+            >
             <span class="th-icons">
               <p-sortIcon field="dataAbertura"></p-sortIcon>
             </span>
@@ -284,16 +308,22 @@
         </th>
 
         <th class="text-center">
-          <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.sla' | translate">{{
-            'tickets.columns.sla' | translate
-          }}</span>
+          <span
+            class="th-label"
+            tooltipPosition="top"
+            [pTooltip]="'tickets.columns.sla' | translate"
+            >{{ 'tickets.columns.sla' | translate }}</span
+          >
         </th>
 
         <th pSortableColumn="updatedAt">
           <div class="th-flex text-center">
-            <span class="th-label" tooltipPosition="top" [pTooltip]="'tickets.columns.atualizacao' | translate">{{
-              'tickets.columns.atualizacao' | translate
-            }}</span>
+            <span
+              class="th-label"
+              tooltipPosition="top"
+              [pTooltip]="'tickets.columns.atualizacao' | translate"
+              >{{ 'tickets.columns.atualizacao' | translate }}</span
+            >
             <span class="th-icons">
               <p-sortIcon field="updatedAt"></p-sortIcon>
             </span>
@@ -349,7 +379,10 @@
         </td>
         <td class="text-center" [attr.data-label]="'tickets.columns.sla' | translate">
           @if (isOverdue(row)) {
-            <app-status-badge [tone]="'danger'" [label]="'tickets.sla.overdue' | translate"></app-status-badge>
+            <app-status-badge
+              [tone]="'danger'"
+              [label]="'tickets.sla.overdue' | translate"
+            ></app-status-badge>
           } @else {
             <span class="opacity-50">-</span>
           }
@@ -362,7 +395,10 @@
         >
           {{ row.updatedAt ? (row.updatedAt | timeAgo) : '-' }}
         </td>
-        <td class="text-center mobile-card-actions" [attr.data-label]="'common.actions' | translate">
+        <td
+          class="text-center mobile-card-actions"
+          [attr.data-label]="'common.actions' | translate"
+        >
           <div class="table-actions">
             @if (scope() === 'queue') {
               <button
