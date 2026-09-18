@@ -235,7 +235,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       const id = params.get('id');
       if (!id) return;
       this.ticketId = id;
-      this.loadAll(id);
+      this.loadAll();
     });
 
     // Atualiza sozinho (ticket/comentários/histórico) quando ESTE chamado muda em outra
@@ -257,7 +257,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.facade.clearTicket();
   }
 
-  private loadAll(id: string): void {
+  private loadAll(): void {
     this.editMode.set(false);
     // Navegação pra um chamado DIFERENTE - o componente é reaproveitado pelo router (mesma rota,
     // só o :id muda), então esses 2 campos ficariam com o valor selecionado no chamado anterior se
