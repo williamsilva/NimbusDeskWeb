@@ -39,7 +39,7 @@ import {
   isTicketStatusTerminal,
   ticketAllowedNextStatuses,
 } from '@models/enums/ticket-status.enum';
-import { ticketPriorityTone } from '@models/enums/ticket-priority.enum';
+import { TicketPriorityEnum, TICKET_PRIORITY_VALUES, ticketPriorityTone } from '@models/enums/ticket-priority.enum';
 import { isTicketSlaOverdue } from '@models/tickets.models';
 import { TicketCommentModel } from '@models/ticket-comment.models';
 
@@ -111,6 +111,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     const ticket = this.ticket();
     return !!ticket && this.policy.canEdit(ticket);
   });
+  /** CHAMADO_EDIT dedicada (2026-09-21, só ADMINISTRADOR) - só quem tem essa permissão pode
+   *  alterar a prioridade na edição (ver #openEdit/tickets-permission.policy.ts#canEditAdmin). */
+  readonly canEditPriority = computed(() => this.policy.canEditAdmin());
   readonly canManageParticipants = computed(() => {
     const ticket = this.ticket();
     return !!ticket && this.policy.canManageParticipants(ticket);
@@ -198,6 +201,19 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     categoriaId: this.fb.control<string | null>(null, [Validators.required]),
     setorId: this.fb.control<string | null>(null),
     equipamentoRefId: this.fb.control<string | null>(null),
+    /** Só editável (habilitado) por quem tem CHAMADO_EDIT - ver #openEdit/#canEditPriority. Fica
+     *  desabilitado (não omitido) pra quem não pode: o backend exige o campo no payload mesmo em
+     *  edição (@NotNull), ver TicketUpsertInput#prioridade. */
+    prioridade: this.fb.control<TicketPriorityEnum | null>(null, [Validators.required]),
+  });
+
+  /** Mesma fonte de opções da criação (TicketsCreateDialogComponent#priorityOptions). */
+  readonly priorityOptions = computed(() => {
+    this.i18n.getAppliedLang();
+    return TICKET_PRIORITY_VALUES.map((value) => ({
+      value,
+      label: this.i18n.tUi(`tickets.priority.${value}` as never),
+    }));
   });
 
   /** 2026-09-09: pré-seleciona categoria/setor/equipamento quando só há 1 opção cadastrada (ver
@@ -301,7 +317,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       categoriaId: ticket.categoriaId,
       setorId: ticket.setorId,
       equipamentoRefId: ticket.equipamentoRefId,
+      prioridade: ticket.prioridade,
     });
+    if (this.canEditPriority()) {
+      this.editForm.controls.prioridade.enable();
+    } else {
+      this.editForm.controls.prioridade.disable();
+    }
     this.autoSelect.applyNow();
     this.editMode.set(true);
   }
@@ -325,6 +347,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         categoriaId: v.categoriaId!,
         setorId: v.setorId,
         equipamentoRefId: v.equipamentoRefId,
+        prioridade: v.prioridade!,
       })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({

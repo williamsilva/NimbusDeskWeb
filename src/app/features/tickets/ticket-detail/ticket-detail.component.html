@@ -94,6 +94,23 @@
                   <label for="edit-categoriaId">{{ 'tickets.fields.categoria' | translate }}</label>
                 </p-floatLabel>
               </div>
+              @if (canEditPriority()) {
+                <div class="col-12 md:col-4 p-2">
+                  <p-floatLabel variant="on" class="w-full">
+                    <p-select
+                      size="small"
+                      class="w-full"
+                      appendTo="body"
+                      inputId="edit-prioridade"
+                      optionLabel="label"
+                      optionValue="value"
+                      [options]="priorityOptions()"
+                      formControlName="prioridade"
+                    ></p-select>
+                    <label for="edit-prioridade">{{ 'tickets.fields.prioridade' | translate }}</label>
+                  </p-floatLabel>
+                </div>
+              }
               <div class="col-12 md:col-4 p-2">
                 <p-floatLabel variant="on" class="w-full">
                   <p-select

@@ -63,6 +63,13 @@ export interface TicketUpsertInput {
   categoriaId: string;
   setorId: string | null;
   equipamentoRefId: string | null;
+  /** Sempre obrigatório no payload, mesmo em edição (espelha com.nimbusdesk.tickets.dto.request.
+   *  TicketRequest#prioridade, {@code @NotNull} tanto na criação quanto na edição) - mas só é de
+   *  fato APLICADO pelo backend quando quem edita tem CHAMADO_EDIT (2026-09-21, ver
+   *  TicketsPermissionPolicy.canEditAdmin/TicketDetailComponent#canEditPriority). Quem não pode
+   *  alterar prioridade ainda precisa enviar o valor atual do chamado aqui (controle desabilitado
+   *  no form, não omitido - omitir quebra a validação {@code @NotNull} do backend). */
+  prioridade: TicketPriorityEnum;
 }
 
 export interface TicketCreateInput extends TicketUpsertInput {
@@ -71,12 +78,6 @@ export interface TicketCreateInput extends TicketUpsertInput {
    *  aqui (é filtrado tanto na tela, ver TicketsCreateDialogComponent#participantOptions, quanto
    *  de novo no backend por segurança, ver TicketService#saveParticipants). */
   participantIds: string[];
-  /** 2026-09-09: só existe na CRIAÇÃO (não faz parte de TicketUpsertInput, compartilhado com a
-   *  edição) - antes vinha só do extinto {@code prioridadeDefault} da categoria/SLA escolhida, sem
-   *  o usuário poder opinar; agora o solicitante sempre informa direto na abertura (ver
-   *  TicketsCreateDialogComponent), obrigatório também no backend (com.nimbusdesk.tickets.dto.
-   *  request.TicketRequest#prioridade). */
-  prioridade: TicketPriorityEnum;
 }
 
 export interface TicketAssignInput {

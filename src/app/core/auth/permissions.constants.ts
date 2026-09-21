@@ -5,6 +5,9 @@ export const PERMISSIONS = {
   CHAMADO: {
     VIEW: 'CHAMADO_CONSULT',
     MANAGE: 'CHAMADO_MANAGE',
+    /* Dedicada, não reaproveita MANAGE (2026-09-21, só ADMINISTRADOR) - edita em qualquer status,
+     * inclusive prioridade. Ver TicketsPermissionPolicy.canEditAdmin/TicketService#update. */
+    EDIT: 'CHAMADO_EDIT',
   },
 
   CATEGORIA: {
